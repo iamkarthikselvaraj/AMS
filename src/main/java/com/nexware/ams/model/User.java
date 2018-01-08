@@ -32,6 +32,7 @@ public class User {
 		this.password = password;
 	}
 
+	// test
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)

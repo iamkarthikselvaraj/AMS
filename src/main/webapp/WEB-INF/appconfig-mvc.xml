@@ -6,6 +6,9 @@
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    
+<!--      <context:component-scan base-package="com.nexware.ams.*" /> -->
+   
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/views/</value>
@@ -14,4 +17,14 @@
             <value>.jsp</value>
         </property>
     </bean>
+    
+<!--     <bean class="com.nexware.ams.web.*"> -->
+<!--     <property name="prefix"> -->
+<!--             <value>/WEB-INF/views/</value> -->
+<!--         </property> -->
+<!--         <property name="suffix"> -->
+<!--             <value>.jsp</value> -->
+<!--         </property> -->
+<!--     </bean> -->
+    
 </beans>

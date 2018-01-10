@@ -31,15 +31,26 @@ height: 150px;
   </head>
   <body>
  <!--Panel-->
- <div class="container">
- <div class="row marginAutoLR">
-<div class="card card-width text-center">
-  <div class="card-header">
-    Attendance Login
-  </div>
-  <div class="card-body marginAutoLR">
-  <button href="#" class="btn btn-primary btn-block btn-width"><strong>Login</strong></button>
-     </div>
+ <div class="container-fluid">
+ 
+<table class="" style="width: 100%;height:100%;margin-top: 15%">
+<tr>
+<td align="center">
+<div class="card text-center" style="max-width: 500px">
+      <div class="card-header">
+        Attendance Login
+    </div>
+    <div class="card-body marginAutoLR">
+    <button href="#" class="btn btn-primary btn-block btn-width"><strong>Login</strong></button>
+    </div>
+</div>
+</td>
+</tr>
+</table>
+<div class="row justify-content-md-center">
+  <div class="col" style="text-align: center;">
+ 
+    
 </div>
 </div>
 </div>

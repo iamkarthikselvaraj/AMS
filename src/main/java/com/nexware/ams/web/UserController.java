@@ -19,16 +19,16 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(Model model, HttpServletRequest request) {
+	public String login(Model model, HttpServletRequest request) {
 		// HttpServletRequest req=
 		String strUserName = request.getParameter("username");
 		if (userService.findByUsername(strUserName) != null) {
 			// model.addAttribute("message", "You have been logged in successfully.");
-			return new ModelAndView("redirect:attendance");
+			return "attendance";
 		} else {
 			model.addAttribute("error", "Your username and password is invalid.");
 		}
-		return new ModelAndView("login");
+		return "login";
 	}
 
 	// public stai

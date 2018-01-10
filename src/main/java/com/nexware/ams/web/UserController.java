@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nexware.ams.service.UserService;
 
@@ -18,16 +19,16 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, HttpServletRequest request) {
+	public ModelAndView login(Model model, HttpServletRequest request) {
 		// HttpServletRequest req=
 		String strUserName = request.getParameter("username");
-		System.out.println("I m inside POST");
 		if (userService.findByUsername(strUserName) != null) {
-			model.addAttribute("message", "You have been logged in successfully.");
+			// model.addAttribute("message", "You have been logged in successfully.");
+			return new ModelAndView("redirect:attendance");
 		} else {
 			model.addAttribute("error", "Your username and password is invalid.");
 		}
-		return "login";
+		return new ModelAndView("login");
 	}
 
 	// public stai

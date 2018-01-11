@@ -35,33 +35,23 @@
 <title>Attendance</title>
 </head>
 <body>
-<!-- Nav bar -->
-<div id="app" class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-faded">
-        <a class="navbar-brand" href="#">Navbar</a>
-        
-        <div class="navbar-collapse collapse">
-                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Register</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-<!-- Nav bar -->
+	<!-- Nav bar -->
+	<div class="container-fluid">
+		<div class="navbar navbar-expand-lg navbar-light" style="background-color: #f7f7f7;">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><p class="navbar-text">Welcome</p></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Karthik </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Logout</a>
+					</div></li>
+			</ul>
+		</div>
+
+	</div>
+	<!-- Nav bar -->
 	<!--Panel-->
 	<div class="container-fluid">
 
@@ -75,6 +65,11 @@
 								<strong>Login</strong>
 							</button>
 						</div>
+						<p style=" text-align: center;">       
+                    <a href="#" style=" text-decoration:none;">View Report</a>
+                    &nbsp;|&nbsp;
+                    <a id="a_ins" href="#" style="text-decoration:none;">Instructions</a>                  
+                </p>
 					</div>
 				</td>
 			</tr>

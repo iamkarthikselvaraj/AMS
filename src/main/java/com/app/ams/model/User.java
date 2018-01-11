@@ -1,4 +1,4 @@
-package com.nexware.ams.model;
+package com.app.ams.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

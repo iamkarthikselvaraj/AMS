@@ -1,8 +1,7 @@
-package com.nexware.ams.service;
+package com.app.ams.service;
 
-import com.nexware.ams.model.User;
+import com.app.ams.model.User;
 
 public interface UserService {
-
 	User findByUsername(String username);
 }

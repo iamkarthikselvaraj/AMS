@@ -43,7 +43,7 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Karthik </a>
+					aria-expanded="false"> ${name}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Logout</a>
 					</div></li>
@@ -62,7 +62,7 @@
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
 							<button href="#" class="btn btn-primary btn-block btn-width">
-								<strong>Login</strong>
+								<strong>${login_logout}</strong>
 							</button>
 						</div>
 						<p style=" text-align: center;">       

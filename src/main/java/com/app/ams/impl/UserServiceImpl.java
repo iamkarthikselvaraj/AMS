@@ -1,10 +1,11 @@
-package com.nexware.ams.service;
+package com.app.ams.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nexware.ams.model.User;
-import com.nexware.ams.repository.UserRepository;
+import com.app.ams.model.User;
+import com.app.ams.repository.UserRepository;
+import com.app.ams.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

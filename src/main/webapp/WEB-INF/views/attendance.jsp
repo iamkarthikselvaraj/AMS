@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,6 +55,7 @@
 	</div>
 	<!-- Nav bar -->
 	<!--Panel-->
+	<form method="POST" action="${contextPath}/attendance" class="form-signin">
 	<div class="container-fluid">
 
 		<table class="" style="width: 100%; height: 100%; margin-top: 15%">
@@ -61,7 +64,7 @@
 					<div class="card text-center" style="max-width: 500px">
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
-							<button href="#" class="btn btn-primary btn-block btn-width">
+							<button type="submit" href="#" class="btn btn-primary btn-block btn-width">
 								<strong>${login_logout}</strong>
 							</button>
 						</div>
@@ -78,6 +81,7 @@
 			<div class="col" style="text-align: center;"></div>
 		</div>
 	</div>
+	</form>
 	<!--/.Panel-->
 
 	<!-- Optional JavaScript -->

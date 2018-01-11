@@ -17,4 +17,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 		// TODO Auto-generated method stub
 		return attendanceRepository.findByEmpId(emp_id);
 	}
+
+	@Override
+	public void setIsLoggedInByEmpId(int is_logged_in, int emp_id) {
+		attendanceRepository.setIsLoggedInByEmpId(is_logged_in, emp_id);
+	}
 }

@@ -64,7 +64,7 @@
 					<div class="card text-center" style="max-width: 500px">
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
-							<button type="submit" href="#" class="btn btn-primary btn-block btn-width">
+							<button type="submit" class="btn btn-primary btn-block btn-width">
 								<strong>${login_logout}</strong>
 							</button>
 						</div>

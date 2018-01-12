@@ -1,6 +1,7 @@
 package com.app.ams.web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,17 +26,20 @@ public class UserController {
 		String strUserName = request.getParameter("username");
 		User user = userService.findByUsername(strUserName);
 		if (user != null) {
-
+			HttpSession session = request.getSession(false);
 			int login_logout;
 			Attendance attendance = attendanceService.findByEmp_id(user.getId());
 			login_logout = attendance.getIsLoggedIn();
 			if (login_logout == 1) {
-				model.addAttribute("login_logout", "Logout");
+				session.setAttribute("login_logout", "Logout");
 			} else if (login_logout == 0) {
-				model.addAttribute("login_logout", "Login");
+				session.setAttribute("login_logout", "Login");
 			}
-			model.addAttribute("name", user.getUsername());
-			model.addAttribute("emp_id", user.getId());
+
+			session.setAttribute("name", user.getUsername());
+			session.setAttribute("emp_id", user.getId());
+			// model.addAttribute("name", user.getUsername());
+			// model.addAttribute("emp_id", user.getId());
 			return "attendance";
 		} else {
 			model.addAttribute("error", "Your username and password is invalid.");
@@ -45,26 +49,19 @@ public class UserController {
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
 	public String attendance_login_logout(Model model, HttpServletRequest request) {
-
-		// attendanceService.setIsLoggedInByEmpId(emp_id);
-
-		String strUserName = request.getParameter("username");
-		User user = userService.findByUsername(strUserName);
-		if (user != null) {
-
-			int login_logout;
-			Attendance attendance = attendanceService.findByEmp_id(user.getId());
-			login_logout = attendance.getIsLoggedIn();
-			if (login_logout == 1) {
-				model.addAttribute("login_logout", "Logout");
-			} else if (login_logout == 0) {
-				model.addAttribute("login_logout", "Login");
-			}
-			model.addAttribute("name", user.getUsername());
-			return "attendance";
+		HttpSession session = request.getSession();
+		
+		String login_logout = session.getAttribute("login_logout").toString();
+				int update_attendance;
+//				session.removeAttribute("login_logout");
+		if (login_logout.equalsIgnoreCase("login")) {
+			update_attendance = 0;
+			session.setAttribute("login_logout", "Logout");
 		} else {
-			model.addAttribute("error", "Your username and password is invalid.");
+			update_attendance = 1;
+			session.setAttribute("login_logout", "Login");
 		}
+		attendanceService.setIsLoggedInByEmpId(update_attendance,Integer.parseInt(session.getAttribute("emp_id").toString()));
 		return "attendance";
 	}
 

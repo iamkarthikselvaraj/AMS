@@ -1,7 +1,8 @@
 package com.app.ams.model;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,40 +13,41 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee_details")
-public class EmployeeDetails {
+public class EmployeeDetail {
 
 	private int id;
+
 	private String empCode;
-	@Column(name = "name")
+
 	private String name;
-	@Column(name = "father_name")
+
 	private String father_name;
-	@Column(name = "email")
+
 	private String email;
-	@Column(name = "present_address")
+
 	private String present_address;
-	@Column(name = "permanent_address")
+
 	private String permanent_address;
-	@Column(name = "mobile_number")
+
 	private String mobile_number;
-	@Column(name = "designation")
+
 	private String designation;
-	@Column(name = "gender")
+
 	private String gender;
-	@Column(name = "doj")
+
 	private Date doj;
-	@Column(name = "dob")
+
 	private Date dob;
+
 	private User user;
 
-	public EmployeeDetails(String name, User user) {
-		super();
+	public EmployeeDetail(String name) {
+
 		this.name = name;
-		this.user = user;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public int getId() {
 		return id;
@@ -144,7 +146,7 @@ public class EmployeeDetails {
 		this.dob = dob;
 	}
 
-	@OneToOne(mappedBy = "employeeDetails")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "employeeDetails")
 	public User getUser() {
 		return user;
 	}

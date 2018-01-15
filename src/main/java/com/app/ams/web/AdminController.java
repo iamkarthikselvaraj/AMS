@@ -8,8 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.app.ams.model.Attendance;
-import com.app.ams.model.EmployeeDetails;
+import com.app.ams.model.EmployeeDetail;
 import com.app.ams.model.User;
 import com.app.ams.service.AdminService;
 
@@ -20,9 +19,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
 	public String createEmployee(Model model, HttpServletRequest request) {
-		EmployeeDetails emp_details = new EmployeeDetails("karthik", new User("karthik", new Attendance()));
-
-		adminService.createEmployee(emp_details);
+		EmployeeDetail emp_details = new EmployeeDetail("karthik");
+		User user = new User("karthik", emp_details);
+		adminService.createEmployee(user);
 		return "createEmployee";
 	}
 

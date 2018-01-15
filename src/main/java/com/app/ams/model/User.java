@@ -17,13 +17,25 @@ public class User {
 	private String username;
 	private String password;
 	private int privilage;
-	private EmployeeDetails employeeDetails;
-	private Attendance attendance;
 
-	public User(String username, Attendance attendance) {
+	private EmployeeDetail employeeDetail;
+	// private Attendance attendance;
 
+	public User(String username, EmployeeDetail employeeDetail) {
+		this.employeeDetail = employeeDetail;
 		this.username = username;
-		this.attendance = attendance;
+		// this.attendance = attendance;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Column(name = "username")
@@ -44,18 +56,6 @@ public class User {
 		this.password = password;
 	}
 
-	// test
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Column(name = "privilage")
 	public int getPrivilage() {
 		return privilage;
@@ -67,21 +67,21 @@ public class User {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	public EmployeeDetails getEmployeeDetails() {
-		return employeeDetails;
+	public EmployeeDetail getEmployeeDetails() {
+		return employeeDetail;
 	}
 
-	public void setEmployeeDetails(EmployeeDetails employeeDetails) {
-		this.employeeDetails = employeeDetails;
+	public void setEmployeeDetails(EmployeeDetail employeeDetail) {
+		this.employeeDetail = employeeDetail;
 	}
 
-	@OneToOne(mappedBy = "user")
-	public Attendance getAttendance() {
-		return attendance;
-	}
-
-	public void setAttendance(Attendance attendance) {
-		this.attendance = attendance;
-	}
+	// @OneToOne(mappedBy = "user")
+	// public Attendance getAttendance() {
+	// return attendance;
+	// }
+	//
+	// public void setAttendance(Attendance attendance) {
+	// this.attendance = attendance;
+	// }
 
 }

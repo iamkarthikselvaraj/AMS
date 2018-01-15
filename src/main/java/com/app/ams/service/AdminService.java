@@ -1,7 +1,7 @@
 package com.app.ams.service;
 
-import com.app.ams.model.EmployeeDetails;
+import com.app.ams.model.User;
 
 public interface AdminService {
-	void createEmployee(EmployeeDetails emp_details);
+	void createEmployee(User user);
 }

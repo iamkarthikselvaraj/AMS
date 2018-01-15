@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -41,10 +41,8 @@
 <body>
 	<!-- Nav bar -->
 	<div class="container-fluid">
-		<div class="navbar navbar-expand-lg navbar-light" style="background-color: #f7f7f7;">
-		<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="${contextPath}/createEmployee">Create Employee</a></li>
-							</ul>
+		<div class="navbar navbar-expand-lg navbar-light"
+			style="background-color: #f7f7f7;">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><p class="navbar-text">Welcome</p></li>
 				<li class="nav-item dropdown"><a
@@ -59,35 +57,41 @@
 
 	</div>
 	<!-- Nav bar -->
-	<!--Panel-->
-	<form method="POST" action="${contextPath}/attendance" class="form-signin">
+	<!--Table-->
 	<div class="container-fluid">
-
-		<table class="" style="width: 100%; height: 100%; margin-top: 15%">
-			<tr>
-				<td align="center">
-					<div class="card text-center" style="max-width: 500px">
-						<div class="card-header">Attendance Login</div>
-						<div class="card-body marginAutoLR">
-							<button type="submit" class="btn btn-primary btn-block btn-width">
-								<strong>${login_logout}</strong>
-							</button>
-						</div>
-						<p style=" text-align: center;">       
-                    <a href="${contextPath}/report" style=" text-decoration:none;">View Report</a>
-                    &nbsp;|&nbsp;
-                    <a id="a_ins" href="#" style="text-decoration:none;">Instructions</a>                  
-                </p>
-					</div>
-				</td>
-			</tr>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Date</th>
+					<th>Day</th>
+					<th>Time of Login</th>
+					<th>Time of Logout</th>
+					<th>Worked Hours</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@TwBootstrap</td>
+				</tr>
+				<tr>
+					
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+				</tr>
+				
+			</tbody>
 		</table>
-		<div class="row justify-content-md-center">
-			<div class="col" style="text-align: center;"></div>
-		</div>
 	</div>
-	</form>
-	<!--/.Panel-->
+	<!--/Table-->
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

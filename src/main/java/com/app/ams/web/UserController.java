@@ -50,10 +50,10 @@ public class UserController {
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
 	public String attendance_login_logout(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+
 		String login_logout = session.getAttribute("login_logout").toString();
-				int update_attendance;
-//				session.removeAttribute("login_logout");
+		int update_attendance;
+		// session.removeAttribute("login_logout");
 		if (login_logout.equalsIgnoreCase("login")) {
 			update_attendance = 0;
 			session.setAttribute("login_logout", "Logout");
@@ -61,8 +61,19 @@ public class UserController {
 			update_attendance = 1;
 			session.setAttribute("login_logout", "Login");
 		}
-		attendanceService.setIsLoggedInByEmpId(update_attendance,Integer.parseInt(session.getAttribute("emp_id").toString()));
+		attendanceService.setIsLoggedInByEmpId(update_attendance,
+				Integer.parseInt(session.getAttribute("emp_id").toString()));
 		return "attendance";
 	}
 
+	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
+	public String attendance_login_logout() {
+		return "attendance";
+	}
+
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
+	public String report(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		return "report";
+	}
 }

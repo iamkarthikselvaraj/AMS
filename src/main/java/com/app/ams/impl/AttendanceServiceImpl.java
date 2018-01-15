@@ -13,13 +13,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 	private AttendanceRepo attendanceRepository;
 
 	@Override
-	public Attendance findByEmp_id(int emp_id) {
+	public Attendance findByUserID(int emp_id) {
 		// TODO Auto-generated method stub
-		return attendanceRepository.findByEmpId(emp_id);
+		return attendanceRepository.findByUserId(emp_id);
 	}
 
 	@Override
 	public void setIsLoggedInByEmpId(int is_logged_in, int emp_id) {
 		attendanceRepository.setIsLoggedInByEmpId(is_logged_in, emp_id);
 	}
+
 }

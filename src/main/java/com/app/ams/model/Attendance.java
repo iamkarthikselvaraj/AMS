@@ -1,24 +1,31 @@
 package com.app.ams.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "attendance")
 public class Attendance {
-	private int empId;
+	private int id;
 	private int isLoggedIn;
+	private User user;
 
 	@Id
-	@Column(name = "emp_id")
-	public int getEmpId() {
-		return empId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	public int getId() {
+		return id;
 	}
 
-	public void setEmpId(int empId) {
-		this.empId = empId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Column(name = "is_logged_in")
@@ -28,6 +35,16 @@ public class Attendance {
 
 	public void setIsLoggedIn(int isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

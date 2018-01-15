@@ -28,7 +28,7 @@ public class UserController {
 		if (user != null) {
 			HttpSession session = request.getSession(false);
 			int login_logout;
-			Attendance attendance = attendanceService.findByEmp_id(user.getId());
+			Attendance attendance = attendanceService.findByUserID(user.getId());
 			login_logout = attendance.getIsLoggedIn();
 			if (login_logout == 1) {
 				session.setAttribute("login_logout", "Logout");

@@ -7,15 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee_details")
 public class EmployeeDetails {
 
-	@Column(name = "id")
 	private int id;
-
 	private String empCode;
 	@Column(name = "name")
 	private String name;
@@ -37,9 +36,17 @@ public class EmployeeDetails {
 	private Date doj;
 	@Column(name = "dob")
 	private Date dob;
+	private User user;
+
+	public EmployeeDetails(String name, User user) {
+		super();
+		this.name = name;
+		this.user = user;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	public int getId() {
 		return id;
 	}
@@ -135,6 +142,15 @@ public class EmployeeDetails {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	@OneToOne(mappedBy = "employeeDetails")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

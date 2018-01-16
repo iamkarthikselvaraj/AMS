@@ -1,7 +1,7 @@
 package com.app.ams.service;
 
-import com.app.ams.model.User;
+import com.app.ams.model.Attendance;
 
 public interface AdminService {
-	void createEmployee(User user);
+	void createEmployee(Attendance attendance);
 }

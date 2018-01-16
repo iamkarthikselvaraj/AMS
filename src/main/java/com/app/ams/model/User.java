@@ -1,5 +1,7 @@
 package com.app.ams.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,19 +14,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 	private int id;
 	private String username;
 	private String password;
 	private int privilage;
 
 	private EmployeeDetail employeeDetail;
-	// private Attendance attendance;
+	private Attendance attendance;
+
+	public User() {
+
+	}
 
 	public User(String username, EmployeeDetail employeeDetail) {
 		this.employeeDetail = employeeDetail;
 		this.username = username;
-		// this.attendance = attendance;
 	}
 
 	@Id
@@ -75,13 +80,13 @@ public class User {
 		this.employeeDetail = employeeDetail;
 	}
 
-	// @OneToOne(mappedBy = "user")
-	// public Attendance getAttendance() {
-	// return attendance;
-	// }
-	//
-	// public void setAttendance(Attendance attendance) {
-	// this.attendance = attendance;
-	// }
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	public Attendance getAttendance() {
+		return attendance;
+	}
+
+	public void setAttendance(Attendance attendance) {
+		this.attendance = attendance;
+	}
 
 }

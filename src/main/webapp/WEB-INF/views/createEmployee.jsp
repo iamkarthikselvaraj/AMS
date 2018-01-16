@@ -74,11 +74,11 @@
 		  			</div>
 		  			<div class="form-group col-md-6">
 				    	<label for="telephone">DOJ</label>
-				    	<input type="date" class="form-control" id="" placeholder=" Enter DOJ">
+				    	<input type="date" class="form-control" name="doj" placeholder=" Enter DOJ">
 		  			</div>
 		  			<div class="form-group col-md-6">
 				    	<label for="telephone">DOB</label>
-				    	<input type="date" class="form-control" id="" placeholder=" Enter DOB">
+				    	<input type="date" class="form-control" name="dob" placeholder=" Enter DOB">
 		  			</div>
 		  					  		</div>
 	  			

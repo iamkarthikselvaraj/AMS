@@ -1,5 +1,6 @@
 package com.app.ams.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee_details")
-public class EmployeeDetail {
+public class EmployeeDetail implements Serializable {
 
 	private int id;
 
@@ -41,9 +42,23 @@ public class EmployeeDetail {
 
 	private User user;
 
-	public EmployeeDetail(String name) {
+	public EmployeeDetail() {
 
+	}
+
+	public EmployeeDetail(String name, String father_name, String email, String present_address,
+			String permanent_address, String mobile_number, String designation, String gender, Date doj, Date dob) {
 		this.name = name;
+		this.father_name = father_name;
+		this.email = email;
+		this.present_address = present_address;
+		this.permanent_address = permanent_address;
+		this.mobile_number = mobile_number;
+		this.designation = designation;
+		this.gender = gender;
+		this.doj = doj;
+		this.dob = dob;
+
 	}
 
 	@Id

@@ -1,5 +1,7 @@
 package com.app.ams.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +12,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "attendance")
-public class Attendance {
+public class Attendance implements Serializable {
 	private int id;
 	private int isLoggedIn;
 	private User user;
+
+	public Attendance() {
+
+	}
+
+	public Attendance(User user) {
+
+		this.user = user;
+	}
 
 	@Id
 	@Column(name = "id")

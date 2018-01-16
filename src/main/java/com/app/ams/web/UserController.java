@@ -61,7 +61,7 @@ public class UserController {
 			update_attendance = 1;
 			session.setAttribute("login_logout", "Login");
 		}
-		attendanceService.setIsLoggedInByEmpId(update_attendance,
+		attendanceService.setIsLoggedInByUserID(update_attendance,
 				Integer.parseInt(session.getAttribute("emp_id").toString()));
 		return "attendance";
 	}
@@ -73,7 +73,7 @@ public class UserController {
 
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public String report(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+
 		return "report";
 	}
 }

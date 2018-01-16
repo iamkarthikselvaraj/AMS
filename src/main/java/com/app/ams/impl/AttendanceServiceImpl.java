@@ -19,7 +19,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 
 	@Override
-	public void setIsLoggedInByEmpId(int is_logged_in, int emp_id) {
+	public void setIsLoggedInByUserID(int is_logged_in, int emp_id) {
 		attendanceRepository.setIsLoggedInByEmpId(is_logged_in, emp_id);
 	}
 

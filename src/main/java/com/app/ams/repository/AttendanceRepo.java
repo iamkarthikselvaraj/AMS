@@ -15,5 +15,5 @@ public interface AttendanceRepo extends JpaRepository<Attendance, Long> {
 	@Transactional
 	@Modifying
 	@Query(value = "update attendance a set a.is_logged_in = ?1 where a.user_id=?2", nativeQuery = true)
-	void setIsLoggedInByEmpId(int is_logged_in, int user_id);
+	void setIsLoggedInByUserID(int is_logged_in, int user_id);
 }

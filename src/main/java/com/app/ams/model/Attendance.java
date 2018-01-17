@@ -2,12 +2,9 @@ package com.app.ams.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,15 +12,25 @@ import javax.persistence.Table;
 public class Attendance implements Serializable {
 	private int id;
 	private int isLoggedIn;
-	private User user;
+	private int userId;
+	// private User user;
 
 	public Attendance() {
 
 	}
 
+	@Column(name = "user_id")
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public Attendance(User user) {
 
-		this.user = user;
+		// this.user = user;
 	}
 
 	@Id
@@ -45,14 +52,14 @@ public class Attendance implements Serializable {
 		this.isLoggedIn = isLoggedIn;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	// public User getUser() {
+	// return user;
+	// }
+	//
+	// public void setUser(User user) {
+	// this.user = user;
+	// }
 
 }

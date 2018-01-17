@@ -28,7 +28,7 @@ public class UserController {
 		if (user != null) {
 			HttpSession session = request.getSession(false);
 			int login_logout;
-			Attendance attendance = attendanceService.findByUserID(user.getId());
+			Attendance attendance = attendanceService.findByUserID(user.getUserId());
 			login_logout = attendance.getIsLoggedIn();
 			if (login_logout == 1) {
 				session.setAttribute("login_logout", "Logout");
@@ -37,7 +37,7 @@ public class UserController {
 			}
 
 			session.setAttribute("name", user.getUsername());
-			session.setAttribute("emp_id", user.getId());
+			session.setAttribute("user_id", user.getUserId());
 			// model.addAttribute("name", user.getUsername());
 			// model.addAttribute("emp_id", user.getId());
 			return "attendance";
@@ -62,7 +62,7 @@ public class UserController {
 			session.setAttribute("login_logout", "Login");
 		}
 		attendanceService.setIsLoggedInByUserID(update_attendance,
-				Integer.parseInt(session.getAttribute("emp_id").toString()));
+				Integer.parseInt(session.getAttribute("user_id").toString()));
 		return "attendance";
 	}
 

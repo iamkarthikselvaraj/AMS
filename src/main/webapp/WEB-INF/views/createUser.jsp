@@ -21,11 +21,11 @@
 <body>
 	<div class="container">
 	<div class="row">
-		<form method="POST" action="${contextPath}/createEmployee">
+		<form method="POST" action="${contextPath}/createUser">
 			<div class="col-md-12">
 			    <div class="row">
 		  			<div class="form-group col-md-6">
-		  				<label for="exampleInputUsername">Employee Code</label>
+		  				<label for="exampleInputUsername">Username</label>
 				    	<input type="text" class="form-control" id="emp_code" placeholder="" disabled>
 			  		</div>
 			  		<div class="form-group col-md-6">

@@ -27,12 +27,12 @@ public class UserController {
 		User user = userService.findByUsername(strUserName);
 		if (user != null) {
 			HttpSession session = request.getSession(false);
-			int login_logout;
+			int isLogin;
 			Attendance attendance = attendanceService.findByUserID(user.getUserId());
-			login_logout = attendance.getIsLoggedIn();
-			if (login_logout == 1) {
+			isLogin = attendance.getLogin();
+			if (isLogin == (short) 1) {
 				session.setAttribute("login_logout", "Logout");
-			} else if (login_logout == 0) {
+			} else {
 				session.setAttribute("login_logout", "Login");
 			}
 
@@ -52,17 +52,16 @@ public class UserController {
 		HttpSession session = request.getSession();
 
 		String login_logout = session.getAttribute("login_logout").toString();
-		int update_attendance;
+		int isLogin;
 		// session.removeAttribute("login_logout");
 		if (login_logout.equalsIgnoreCase("login")) {
-			update_attendance = 0;
+			isLogin = 0;
 			session.setAttribute("login_logout", "Logout");
 		} else {
-			update_attendance = 1;
+			isLogin = 1;
 			session.setAttribute("login_logout", "Login");
 		}
-		attendanceService.setIsLoggedInByUserID(update_attendance,
-				Integer.parseInt(session.getAttribute("user_id").toString()));
+		attendanceService.setLoginByUserID(isLogin, Integer.parseInt(session.getAttribute("user_id").toString()));
 		return "attendance";
 	}
 

@@ -1,5 +1,5 @@
 package com.app.ams.model;
-// Generated Jan 18, 2018 8:54:57 PM by Hibernate Tools 5.0.6.Final
+// Generated Jan 19, 2018 8:56:43 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;

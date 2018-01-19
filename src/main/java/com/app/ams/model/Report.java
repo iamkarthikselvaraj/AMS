@@ -1,5 +1,5 @@
 package com.app.ams.model;
-// Generated Jan 19, 2018 8:56:43 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 19, 2018 9:11:33 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,6 +28,7 @@ public class Report implements java.io.Serializable {
 	private Integer workedHours;
 	private String flag;
 	private Date lastUpdated;
+	private String comments;
 
 	public Report() {
 	}
@@ -37,7 +38,7 @@ public class Report implements java.io.Serializable {
 	}
 
 	public Report(int id, Attendance attendance, Date date, String day, Date timeOfLogin, Date timeOfLogout,
-			Integer workedHours, String flag, Date lastUpdated) {
+			Integer workedHours, String flag, Date lastUpdated, String comments) {
 		this.id = id;
 		this.attendance = attendance;
 		this.date = date;
@@ -47,6 +48,7 @@ public class Report implements java.io.Serializable {
 		this.workedHours = workedHours;
 		this.flag = flag;
 		this.lastUpdated = lastUpdated;
+		this.comments = comments;
 	}
 
 	@Id
@@ -135,6 +137,15 @@ public class Report implements java.io.Serializable {
 
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+
+	@Column(name = "comments", length = 1000)
+	public String getComments() {
+		return this.comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 }

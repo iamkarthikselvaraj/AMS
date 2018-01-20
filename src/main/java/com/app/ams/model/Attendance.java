@@ -1,9 +1,11 @@
 package com.app.ams.model;
-// Generated Jan 19, 2018 9:11:33 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 11:24:03 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +17,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -88,7 +91,7 @@ public class Attendance implements java.io.Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attendance")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attendance", cascade = CascadeType.ALL)
 	public Set<Report> getReports() {
 		return this.reports;
 	}

@@ -1,14 +1,16 @@
 package com.app.ams.model;
-// Generated Jan 19, 2018 9:11:33 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 11:24:03 AM by Hibernate Tools 5.0.6.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +25,8 @@ import javax.persistence.TemporalType;
 public class Privilege implements java.io.Serializable {
 
 	private Integer privilegeId;
-	private int privilege;
+	private Integer privilege;
+	private String access;
 	private Date lastUpdated;
 	private Set<User> users = new HashSet<User>(0);
 
@@ -34,8 +37,9 @@ public class Privilege implements java.io.Serializable {
 		this.privilege = privilege;
 	}
 
-	public Privilege(int privilege, Date lastUpdated, Set<User> users) {
+	public Privilege(int privilege, String access, Date lastUpdated, Set<User> users) {
 		this.privilege = privilege;
+		this.access = access;
 		this.lastUpdated = lastUpdated;
 		this.users = users;
 	}
@@ -59,6 +63,15 @@ public class Privilege implements java.io.Serializable {
 
 	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
+	}
+
+	@Column(name = "access", length = 45)
+	public String getAccess() {
+		return this.access;
+	}
+
+	public void setAccess(String access) {
+		this.access = access;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

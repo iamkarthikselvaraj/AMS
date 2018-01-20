@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -15,81 +17,48 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
 	integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
 	crossorigin="anonymous">
-
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <title>Attendance</title>
 </head>
 <body>
 	<div class="container">
-	<div class="row">
-		<form method="POST" action="${contextPath}/createUser">
-			<div class="col-md-12">
-			    <div class="row">
-		  			<div class="form-group col-md-6">
-		  				<label for="exampleInputUsername">Username</label>
-				    	<input type="text" class="form-control" id="emp_code" placeholder="" disabled>
-			  		</div>
-			  		<div class="form-group col-md-6">
-				    	<label for="name">Employee Name</label>
-				    	<input type="text" class="form-control" name="name" placeholder=" Enter Employee Name">
-				  	</div>	
-				  	<div class="form-group col-md-6">
-				    	<label for="father_name">Father/Husband Name</label>
-				    	<input type="text" class="form-control" name="father_name" placeholder=" Enter Father/Husband Name no.">
-		  			</div>
-		  			<div class="form-group col-md-6">
-				    	<label for="email">Email</label>
-				    	<input type="text" class="form-control" id="email" name="email" placeholder=" Enter Email">
-		  			</div>
-		  		</div>
-	  			  			<div class="form-group">
-			    	<label for="present_address">Present Address</label>
-			    	<textarea  class="form-control" name="present_address" placeholder="Present Address"></textarea>
-	  			</div>
-	  			<div class="form-group">
-			    	<label for="permanent_address">Permanent Address</label>
-			    	<textarea  class="form-control" name="permanent_address" placeholder="Permanent Address"></textarea>
-	  			</div>
-	  			
-	  			<div class="row">
-		  			
-		  			<div class="form-group col-md-6">
-				    	<label for="mobile">Mobile Number</label>
-				    	<input type="text" class="form-control" name="mobile" placeholder=" Enter Mobile no.">
-		  			</div>
-		  			<div class="form-group col-md-6">
-				    	<label for="telephone">Designation</label>
-				    	<select class="form-control">
-				    	    <option>--Select Designation--</option>
-				    	    <option>--Select Designation--</option>
-				    	    <option>--Select Designation--</option>
-				    	</select>
-		  			</div>
-		  					  			<div class="form-group col-md-6">
-				    	<label for="telephone">Gender</label>
-				    	<select class="form-control">
-				    	    <option>--Select Gender--</option>
-				    	    <option>Male</option>
-				    	    <option>Female</option>
-				    	</select>
-		  			</div>
-		  			<div class="form-group col-md-6">
-				    	<label for="telephone">DOJ</label>
-				    	<input type="date" class="form-control" name="doj" placeholder=" Enter DOJ">
-		  			</div>
-		  			<div class="form-group col-md-6">
-				    	<label for="telephone">DOB</label>
-				    	<input type="date" class="form-control" name="dob" placeholder=" Enter DOB">
-		  			</div>
-		  					  		</div>
-	  			
-	  			
-	  		</div>
-	  		   	  			
-    	  			<button type="submit" class="btn btn-default col-md-12 submit">Create Employee</button>
-	  			
-		</form>
+
+		<form:form method="POST" modelAttribute="userForm" class="form-signin">
+			<h2 class="form-signin-heading">Create User</h2>
+			<spring:bind path="username">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<form:input type="text" path="username" class="form-control"
+						placeholder="Username" autofocus="true"></form:input>
+					<form:errors path="username"></form:errors>
+				</div>
+			</spring:bind>
+
+			<spring:bind path="password">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<form:input type="password" path="password" class="form-control"
+						placeholder="Password"></form:input>
+					<form:errors path="password"></form:errors>
+				</div>
+			</spring:bind>
+
+			<spring:bind path="passwordConfirm">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<form:input type="password" path="passwordConfirm"
+						class="form-control" placeholder="Confirm your password"></form:input>
+					<form:errors path="passwordConfirm"></form:errors>
+				</div>
+			</spring:bind>
+			<div class="form-group">
+				<form:select path="" name="privileg">
+					<form:option value="-" label="--- Select Privilege---" />
+					<form:options items="${privilegeList}" itemValue="privilegeId"
+						itemLabel="access"></form:options>
+				</form:select>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</form:form>
+
 	</div>
-</div>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

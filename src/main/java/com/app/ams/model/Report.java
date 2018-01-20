@@ -1,7 +1,9 @@
 package com.app.ams.model;
-// Generated Jan 19, 2018 9:11:33 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 11:24:03 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,7 +64,7 @@ public class Report implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	public Attendance getAttendance() {
 		return this.attendance;

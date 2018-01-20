@@ -1,16 +1,14 @@
 package com.app.ams.model;
-// Generated Jan 20, 2018 11:24:03 AM by Hibernate Tools 5.0.6.Final
-
-import static javax.persistence.GenerationType.IDENTITY;
+// Generated Jan 20, 2018 7:35:45 PM by Hibernate Tools 5.2.6.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +23,7 @@ import javax.persistence.TemporalType;
 public class Privilege implements java.io.Serializable {
 
 	private Integer privilegeId;
-	private Integer privilege;
+	private int privilege;
 	private String access;
 	private Date lastUpdated;
 	private Set<User> users = new HashSet<User>(0);

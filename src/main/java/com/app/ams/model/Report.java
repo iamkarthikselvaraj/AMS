@@ -1,12 +1,12 @@
 package com.app.ams.model;
-// Generated Jan 20, 2018 11:24:03 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 7:35:45 PM by Hibernate Tools 5.2.6.Final
 
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "report", catalog = "attendance")
 public class Report implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private Attendance attendance;
 	private Date date;
 	private String day;
@@ -35,13 +35,12 @@ public class Report implements java.io.Serializable {
 	public Report() {
 	}
 
-	public Report(int id) {
-		this.id = id;
+	public Report(Attendance attendance) {
+		this.attendance = attendance;
 	}
 
-	public Report(int id, Attendance attendance, Date date, String day, Date timeOfLogin, Date timeOfLogout,
+	public Report(Attendance attendance, Date date, String day, Date timeOfLogin, Date timeOfLogout,
 			Integer workedHours, String flag, Date lastUpdated, String comments) {
-		this.id = id;
 		this.attendance = attendance;
 		this.date = date;
 		this.day = day;
@@ -54,18 +53,19 @@ public class Report implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
 	public Attendance getAttendance() {
 		return this.attendance;
 	}

@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
    <welcome-file-list>
     <welcome-file>/WEB-INF/views/login.jsp</welcome-file>
-  </welcome-file-list>
+   </welcome-file-list>
      
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -44,4 +44,10 @@ public class AdminServiceImpl implements AdminService {
 		return privilegeRepository.findByprivilegeId(pid);
 	}
 
+	@Override
+	public List<User> findAllUsers() {
+
+		return userRepository.findAll();
+	}
+
 }

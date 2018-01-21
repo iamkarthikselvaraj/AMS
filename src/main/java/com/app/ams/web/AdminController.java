@@ -1,6 +1,5 @@
 package com.app.ams.web;
 
-import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.app.ams.model.Privilege;
 import com.app.ams.model.User;
@@ -28,23 +28,23 @@ public class AdminController {
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	// @RequestMapping(method = RequestMethod.POST)
 	public String createEmployee(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model,
-			HttpServletRequest req) throws ParseException {
+			HttpServletRequest req) {
 		userValidator.validate(user, bindingResult);
-		String p = req.getParameter("privileg");
+		// String p = req.getParameter("privilege");
+		List<Privilege> privileges = adminService.getPrivilegeList();
+		model.addAttribute("privilegeList", privileges);
 		if (bindingResult.hasErrors()) {
-			List<Privilege> privileges = adminService.getPrivilegeList();
-			model.addAttribute("privilegeList", privileges);
 			return "createUser";
 		}
-		Privilege privilege = new Privilege();
+		// Privilege privilegeo = new Privilege();
 		// adminService.getPrivilegeById(Integer.parseInt(p));
-		privilege.setPrivilegeId(Integer.parseInt(p));
-		user.setPrivilege(privilege);
+		// privilegeo.setPrivilegeId(Integer.parseInt(p));
+		// user.setPrivilege(privilegeo);
 		// user.getPrivilege().setPrivilege();
 		adminService.createUser(user);
 		// Attendance attendance = new Attendance(user, 0);
 		// adminService.createEmployee(attendance);
-
+		model.addAttribute("userForm", new User());
 		return "createUser";
 	}
 
@@ -54,5 +54,14 @@ public class AdminController {
 		List<Privilege> privileges = adminService.getPrivilegeList();
 		model.addAttribute("privilegeList", privileges);
 		return "createUser";
+	}
+
+	@RequestMapping(value = "/listUsers", method = RequestMethod.GET)
+	public ModelAndView listUsers(@ModelAttribute("user") User user) {
+		List<User> users = adminService.findAllUsers();
+		ModelAndView map = new ModelAndView("listUsers");
+		map.addObject("users", users);
+		// model.addAttribute("users", users);
+		return map;
 	}
 }

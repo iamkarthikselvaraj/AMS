@@ -21,6 +21,11 @@ public class UserController {
 	@Autowired
 	private AttendanceService attendanceService;
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request) {
 		String strUserName = request.getParameter("username");

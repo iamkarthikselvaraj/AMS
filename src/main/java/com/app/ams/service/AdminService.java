@@ -14,4 +14,6 @@ public interface AdminService {
 	Privilege getPrivilegeById(int pid);
 
 	List<Privilege> getPrivilegeList();
+
+	List<User> findAllUsers();
 }

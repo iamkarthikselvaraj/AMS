@@ -4,10 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 	<!--Table-->
-
 	<div class="container-fluid">
 		<table class="table table-bordered table-striped table-sm">
 			<thead>
@@ -23,16 +20,19 @@
 					<tr>
 						<th scope="row">${user.userId}</th>
 						<td>${user.username}</td>
-						<td>${user.username}</td>
+						<td>${user.privilege.access}</td>
 						<td>
-						<spring:url value="/users/${user.userId}/delete"
-								var="deleteUrl" /> <spring:url
-								value="/users/${user.userId}/update" var="updateUrl" />
+						<form action="${contextPath}/users/${user.userId}/delete"  method="post"><input class="btn btn-danger" type="submit" value="Delete"/></form>
+						<form action="${contextPath}/users/${user.userId}/update"  method="post"><input class="btn btn-danger" type="submit" value="Update"/></form>
+<%-- 						<spring:url value="/users/${user.userId}/delete" --%>
+<%-- 								var="deleteUrl" /> <spring:url --%>
+<%-- 								value="/users/${user.userId}/update" var="updateUrl" /> --%>
 
-							<button class="btn btn-primary"
-								onclick="location.href='${updateUrl}'">Update</button>
-							<button class="btn btn-danger"
-								onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
+<!-- 							<button class="btn btn-primary" -->
+<%-- 								onclick="location.href='${updateUrl}'">Update</button> --%>
+<!-- 							<button class="btn btn-danger" -->
+<%-- 								onclick="post('${deleteUrl}')">Delete</button> --%>
+								</td>
 					</tr>
 				</c:forEach>
 			</tbody>

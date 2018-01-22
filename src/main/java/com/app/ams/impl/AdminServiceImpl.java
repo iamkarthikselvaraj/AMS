@@ -50,4 +50,10 @@ public class AdminServiceImpl implements AdminService {
 		return userRepository.findAll();
 	}
 
+	@Override
+	public void deleteByUserId(int id) {
+		userRepository.deleteByUserId(id);
+
+	}
+
 }

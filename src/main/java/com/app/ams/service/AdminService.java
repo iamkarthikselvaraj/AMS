@@ -11,6 +11,8 @@ public interface AdminService {
 
 	void createUser(User user);
 
+	void deleteByUserId(int id);
+
 	Privilege getPrivilegeById(int pid);
 
 	List<Privilege> getPrivilegeList();

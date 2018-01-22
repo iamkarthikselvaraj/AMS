@@ -4,6 +4,7 @@
 	<div class="container-fluid">
 		<div class="navbar navbar-expand-lg navbar-light" style="background-color: #f7f7f7;">
 		<ul class="navbar-nav mr-auto">
+		<li class="nav-item"><a class="nav-link" href="${contextPath}/attendance">Home</a></li>
 				<li class="nav-item"><a class="nav-link" href="${contextPath}/createUser">Create User</a></li>
 				<li class="nav-item"><a class="nav-link" href="${contextPath}/listUsers">List User</a></li>
 							</ul>

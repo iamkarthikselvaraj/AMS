@@ -14,17 +14,17 @@
 			</list>
 		</property>
 	</bean>
-	
-<bean id="viewResolver"
+
+	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 
 
 
-<!-- 	<bean id="viewResolver" -->
-<!-- 		class="org.springframework.web.servlet.view.UrlBasedViewResolver"> -->
-<!-- 		<property name="viewClass" -->
-<!-- 			value="org.springframework.web.servlet.view.tiles3.TilesView" /> -->
-<!-- 	</bean> -->
+	<!-- <bean id="viewResolver" -->
+	<!-- class="org.springframework.web.servlet.view.UrlBasedViewResolver"> -->
+	<!-- <property name="viewClass" -->
+	<!-- value="org.springframework.web.servlet.view.tiles3.TilesView" /> -->
+	<!-- </bean> -->
 
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -44,9 +44,5 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
-	
-
-
 
 </beans>

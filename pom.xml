@@ -10,10 +10,11 @@
 	<properties>
 		<spring.version>4.2.0.RELEASE</spring.version>
 		<spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
-	<mysql-connector.version>5.1.36</mysql-connector.version>
-	  <commons-dbcp.version>1.4</commons-dbcp.version>
-	    <jstl.version>1.2</jstl.version>
-	    	<apachetiles.version>3.0.5</apachetiles.version>
+		<mysql-connector.version>5.1.36</mysql-connector.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<jstl.version>1.2</jstl.version>
+		<apachetiles.version>3.0.5</apachetiles.version>
+		<spring-security.version>4.0.2.RELEASE</spring-security.version>
 	</properties>
 
 	<dependencies>
@@ -62,6 +63,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector.version}</version>
@@ -78,7 +91,7 @@
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
-<!-- Apache Tiles -->
+		<!-- Apache Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
@@ -101,15 +114,15 @@
 		</dependency>
 	</dependencies>
 	<build>
-	 <plugins>
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-    </plugins>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 		<finalName>ams</finalName>
 	</build>
 </project>

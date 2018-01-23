@@ -37,14 +37,9 @@ public class AdminController {
 		if (bindingResult.hasErrors()) {
 			return "createUser";
 		}
-		// Privilege privilegeo = new Privilege();
-		// adminService.getPrivilegeById(Integer.parseInt(p));
-		// privilegeo.setPrivilegeId(Integer.parseInt(p));
-		// user.setPrivilege(privilegeo);
-		// user.getPrivilege().setPrivilege();
+
 		adminService.createUser(user);
-		// Attendance attendance = new Attendance(user, 0);
-		// adminService.createEmployee(attendance);
+
 		model.addAttribute("userForm", new User());
 		return "createUser";
 	}
@@ -67,7 +62,7 @@ public class AdminController {
 	}
 
 	// delete user
-	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable("id") int id) {
 		adminService.deleteByUserId(id);
 		return "listUsers";

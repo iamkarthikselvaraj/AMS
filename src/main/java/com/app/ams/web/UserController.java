@@ -26,7 +26,7 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.PUT)
 	public String login(Model model, HttpServletRequest request) {
 		String strUserName = request.getParameter("username");
 		User user = userService.findByUsername(strUserName);

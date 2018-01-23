@@ -3,6 +3,7 @@ package com.app.ams.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.ams.model.Attendance;
@@ -21,6 +22,8 @@ public class AdminServiceImpl implements AdminService {
 	private PrivilegeRepo privilegeRepository;
 	@Autowired
 	private UserRepo userRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public void createEmployee(Attendance attendance) {
@@ -35,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void createUser(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
 	}

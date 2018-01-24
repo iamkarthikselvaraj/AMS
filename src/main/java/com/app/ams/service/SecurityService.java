@@ -1,7 +1,9 @@
 package com.app.ams.service;
 
-public interface SecurityService {
-    String findLoggedInUsername();
+import com.app.ams.model.User;
 
-    void autologin(String username, String password);
+public interface SecurityService {
+	User findLoggedInUser();
+
+	// void autologin(String username, String password);
 }

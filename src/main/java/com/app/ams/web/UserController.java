@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.app.ams.model.Attendance;
 import com.app.ams.model.User;
 import com.app.ams.service.AttendanceService;
+import com.app.ams.service.SecurityService;
 import com.app.ams.service.UserService;
 
 @Controller
@@ -20,6 +21,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private AttendanceService attendanceService;
+	@Autowired
+	private SecurityService securityService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
@@ -72,6 +75,7 @@ public class UserController {
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 	public String attendance_login_logout() {
+		User user = securityService.findLoggedInUser();
 		return "attendance";
 	}
 

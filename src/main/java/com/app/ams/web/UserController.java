@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.app.ams.model.Attendance;
 import com.app.ams.model.User;
 import com.app.ams.service.AttendanceService;
 import com.app.ams.service.SecurityService;
@@ -29,31 +28,31 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.PUT)
-	public String login(Model model, HttpServletRequest request) {
-		String strUserName = request.getParameter("username");
-		User user = userService.findByUsername(strUserName);
-		if (user != null) {
-			HttpSession session = request.getSession(false);
-			int isLogin;
-			Attendance attendance = attendanceService.findByUserID(user.getUserId());
-			isLogin = attendance.getLogin();
-			if (isLogin == (short) 1) {
-				session.setAttribute("login_logout", "Logout");
-			} else {
-				session.setAttribute("login_logout", "Login");
-			}
-
-			session.setAttribute("name", user.getUsername());
-			session.setAttribute("user_id", user.getUserId());
-			// model.addAttribute("name", user.getUsername());
-			// model.addAttribute("emp_id", user.getId());
-			return "attendance";
-		} else {
-			model.addAttribute("error", "Your username and password is invalid.");
-		}
-		return "login";
-	}
+	// @RequestMapping(value = "/login", method = RequestMethod.PUT)
+	// public String login(Model model, HttpServletRequest request) {
+	// String strUserName = request.getParameter("username");
+	// User user = userService.findByUsername(strUserName);
+	// if (user != null) {
+	// HttpSession session = request.getSession(false);
+	// int isLogin;
+	// Attendance attendance = attendanceService.findByUserID(user.getUserId());
+	// isLogin = attendance.getLogin();
+	// if (isLogin == (short) 1) {
+	// session.setAttribute("login_logout", "Logout");
+	// } else {
+	// session.setAttribute("login_logout", "Login");
+	// }
+	//
+	// session.setAttribute("name", user.getUsername());
+	// session.setAttribute("user_id", user.getUserId());
+	// // model.addAttribute("name", user.getUsername());
+	// // model.addAttribute("emp_id", user.getId());
+	// return "attendance";
+	// } else {
+	// model.addAttribute("error", "Your username and password is invalid.");
+	// }
+	// return "login";
+	// }
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
 	public String attendance_login_logout(Model model, HttpServletRequest request) {

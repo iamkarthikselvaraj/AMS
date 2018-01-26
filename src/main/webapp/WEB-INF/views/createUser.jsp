@@ -7,11 +7,11 @@
 
 
 <div class="container">
-	<form:form method="POST" modelAttribute="userForm" class="form-signin">
+	<form:form method="POST" modelAttribute="userForm" id="createUserform" class="form-signin">
 		<h2 class="form-signin-heading">Create User</h2>
 		<spring:bind path="username">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<form:input type="text" path="username" class="form-control"
+				<form:input type="text" path="username" name="username1" class="form-control"
 					placeholder="Username" autofocus="true"></form:input>
 				<form:errors path="username"></form:errors>
 			</div>
@@ -19,7 +19,7 @@
 
 		<spring:bind path="password">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<form:input type="password" path="password" class="form-control"
+				<form:input type="password" path="password" name="password"  class="form-control"
 					placeholder="Password"></form:input>
 				<form:errors path="password"></form:errors>
 			</div>
@@ -27,7 +27,7 @@
 
 		<spring:bind path="passwordConfirm">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<form:input type="password" path="passwordConfirm"
+				<form:input type="password" path="passwordConfirm" name="passwordConfirm" 
 					class="form-control" placeholder="Confirm your password"></form:input>
 				<form:errors path="passwordConfirm"></form:errors>
 			</div>
@@ -35,7 +35,7 @@
 		<spring:bind path="privilege">
 			<div class="form-group">
 				<form:select path="privilege.privilegeId" name="privilege">
-					<form:option value="" label="--- Select Privilege---" />
+					<form:option value="0" label="--- Select Privilege---" />
 					<form:options items="${privilegeList}" itemValue="privilegeId"
 						itemLabel="access"></form:options>
 				</form:select>

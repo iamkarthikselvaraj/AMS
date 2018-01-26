@@ -56,5 +56,11 @@
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
 		></script>
+		
+		<!-- JQuery for validation  -->
+	<script src="${contextPath}/resources/js/jquery-3.3.1.min"></script>
+	<script src="${contextPath}/resources/js/jquery.validate.js"></script>
+	<script src="${contextPath}/resources/js/validation.js">	</script>
+		
 </body>
 </html>

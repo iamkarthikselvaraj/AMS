@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="security"
+  uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- Nav bar -->
 <div class="container-fluid">
@@ -8,10 +9,12 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link"
 				href="${contextPath}/attendance">Home</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="${contextPath}/createUser">Create User</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="${contextPath}/listUsers">List User</a></li>
+			<security:authorize access="hasRole('ROLE_USER')">
+				<li class="nav-item"><a class="nav-link"
+					href="${contextPath}/createUser">Create User</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextPath}/listUsers">List User</a></li>
+			</security:authorize>
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -23,9 +26,11 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> ${pageContext.request.userPrincipal.name}</a>
+					aria-expanded="false">
+						${pageContext.request.userPrincipal.name}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" onclick="document.forms['logoutForm'].submit()">Logout</a>
+						<a class="dropdown-item"
+							onclick="document.forms['logoutForm'].submit()">Logout</a>
 					</div></li>
 			</c:if>
 		</ul>

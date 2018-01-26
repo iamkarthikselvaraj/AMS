@@ -73,7 +73,11 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.1.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -112,6 +116,10 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>${apachetiles.version}</version>
 		</dependency>
+
+
+
+
 	</dependencies>
 	<build>
 		<plugins>

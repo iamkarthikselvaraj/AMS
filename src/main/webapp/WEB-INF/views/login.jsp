@@ -54,28 +54,7 @@
 	<!-- JQuery for validation  -->
 	<script src="${contextPath}/resources/js/jquery-3.3.1.min"></script>
 	<script src="${contextPath}/resources/js/jquery.validate.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			$('#loginform').validate({ // initialize the plugin
-				rules : {
-					username : {
-						required : true
-					}
-				},
-				messages : {
-					username : {
-						required : "Please Enter Your Username"
-					}
-				}
-			}
-
-			);
-
-		});
-	</script>
-
-
+	<script src="${contextPath}/resources/js/validation.js">	</script>
 
 </body>
 </html>

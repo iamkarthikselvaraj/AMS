@@ -7,6 +7,14 @@
 
 
 <div class="container">
+		<c:if test="${not empty msg}">
+			<div class="alert alert-${css} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>${msg}</strong>
+			</div>
+		</c:if>
 	<form:form method="POST" modelAttribute="userForm" id="createUserform" class="form-signin">
 		<h2 class="form-signin-heading">Create User</h2>
 		<spring:bind path="username">

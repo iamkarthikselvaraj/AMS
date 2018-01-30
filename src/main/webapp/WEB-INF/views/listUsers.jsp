@@ -6,6 +6,14 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!--Table-->
 <div class="container-fluid">
+		<c:if test="${not empty msg}">
+			<div class="alert alert-${css} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>${msg}</strong>
+			</div>
+		</c:if>
 	<table class="table table-bordered table-striped table-sm">
 		<thead>
 			<tr>
@@ -26,15 +34,18 @@
 						<%-- 						<form action="${contextPath}/users/${user.userId}/update"  method="post"><input class="btn btn-danger" type="submit" value="Update"/></form> --%>
 						<spring:url value="/users/${user.userId}/delete" var="deleteUrl" />
 						<spring:url value="/users/${user.userId}/update" var="updateUrl" />
-						<!-- <input type="button"  onclick="location.href='/register.htm'" value="Register" > -->
 						<button class="btn btn-primary"
 							onclick="location.href='${updateUrl}'">Update</button>
-						<button class="btn btn-danger" onclick="location.href='${deleteUrl}'">Delete</button>
+						<button class="btn btn-danger"
+							onclick="this.disabled=true;post('${deleteUrl}')">Delete</button>
 					</td>
+
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 </div>
 
 <!--/Table-->

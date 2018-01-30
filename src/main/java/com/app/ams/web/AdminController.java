@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.ams.model.Privilege;
 import com.app.ams.model.User;
@@ -29,19 +30,21 @@ public class AdminController {
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	// @RequestMapping(method = RequestMethod.POST)
 	public String createEmployee(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model,
-			HttpServletRequest req) {
+			HttpServletRequest req, final RedirectAttributes redirectAttributes) {
 		userValidator.validate(user, bindingResult);
 		// String p = req.getParameter("privilege");
 		List<Privilege> privileges = adminService.getPrivilegeList();
 		model.addAttribute("privilegeList", privileges);
 		if (bindingResult.hasErrors()) {
-			return "createUser";
+			return "redirect:/createUser";
 		}
 
 		adminService.createUser(user);
 
+		model.addAttribute("css", "success");
+		model.addAttribute("msg", "User added successfully!");
 		model.addAttribute("userForm", new User());
-		return "createUser";
+		return "redirect:/createUser";
 	}
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
@@ -62,10 +65,13 @@ public class AdminController {
 	}
 
 	// delete user
-	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.GET)
-	public String deleteUser(@PathVariable("id") int id) {
+	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
+	public String deleteUser(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
 		adminService.deleteByUserId(id);
-		return "listUsers";
+		redirectAttributes.addFlashAttribute("css", "success");
+		redirectAttributes.addFlashAttribute("msg", "User is deleted!");
+		// return "listUsers";
+		return "redirect:/listUsers";
 
 	}
 

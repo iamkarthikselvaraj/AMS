@@ -9,6 +9,10 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <!-- ... -->
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"	>
@@ -61,6 +65,9 @@
 	<script src="${contextPath}/resources/js/jquery-3.3.1.min"></script>
 	<script src="${contextPath}/resources/js/jquery.validate.js"></script>
 	<script src="${contextPath}/resources/js/validation.js">	</script>
+	
+<!-- 	javascript action -->
+<script src="${contextPath}/resources/js/action.js">	</script>
 		
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.app.ams.model.Attendance;
 import com.app.ams.model.User;
 import com.app.ams.service.AttendanceService;
 import com.app.ams.service.SecurityService;
@@ -75,6 +76,7 @@ public class UserController {
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 	public String attendance_login_logout() {
 		User user = securityService.findLoggedInUser();
+		Attendance attendance = user.getAttendance();
 		return "attendance";
 	}
 

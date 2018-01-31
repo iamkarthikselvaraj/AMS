@@ -28,11 +28,9 @@ public class AdminController {
 	private UserValidator userValidator;
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
-	// @RequestMapping(method = RequestMethod.POST)
-	public String createEmployee(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model,
-			HttpServletRequest req, final RedirectAttributes redirectAttributes) {
+
+	public String createEmployee(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) {
 		userValidator.validate(user, bindingResult);
-		// String p = req.getParameter("privilege");
 		List<Privilege> privileges = adminService.getPrivilegeList();
 		model.addAttribute("privilegeList", privileges);
 		if (bindingResult.hasErrors()) {
@@ -44,7 +42,7 @@ public class AdminController {
 		model.addAttribute("css", "success");
 		model.addAttribute("msg", "User added successfully!");
 		model.addAttribute("userForm", new User());
-		return "redirect:/createUser";
+		return "createUser";
 	}
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)

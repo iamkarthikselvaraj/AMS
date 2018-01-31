@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,54 +30,27 @@ public class UserController {
 		return "login";
 	}
 
-	// @RequestMapping(value = "/login", method = RequestMethod.PUT)
-	// public String login(Model model, HttpServletRequest request) {
-	// String strUserName = request.getParameter("username");
-	// User user = userService.findByUsername(strUserName);
-	// if (user != null) {
-	// HttpSession session = request.getSession(false);
-	// int isLogin;
-	// Attendance attendance = attendanceService.findByUserID(user.getUserId());
-	// isLogin = attendance.getLogin();
-	// if (isLogin == (short) 1) {
-	// session.setAttribute("login_logout", "Logout");
-	// } else {
-	// session.setAttribute("login_logout", "Login");
-	// }
-	//
-	// session.setAttribute("name", user.getUsername());
-	// session.setAttribute("user_id", user.getUserId());
-	// // model.addAttribute("name", user.getUsername());
-	// // model.addAttribute("emp_id", user.getId());
-	// return "attendance";
-	// } else {
-	// model.addAttribute("error", "Your username and password is invalid.");
-	// }
-	// return "login";
-	// }
-
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
-	public String attendance_login_logout(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		String login_logout = session.getAttribute("login_logout").toString();
+	public String attendance_login_logout_Post(@ModelAttribute("attendanceForm") Attendance attendance, Model model) {
+		User user = securityService.findLoggedInUser();
 		int isLogin;
-		// session.removeAttribute("login_logout");
-		if (login_logout.equalsIgnoreCase("login")) {
-			isLogin = 0;
-			session.setAttribute("login_logout", "Logout");
-		} else {
+		if (attendance.getLogin() == 0) {
 			isLogin = 1;
-			session.setAttribute("login_logout", "Login");
+		} else {
+			isLogin = 0;
 		}
-		attendanceService.setLoginByUserID(isLogin, Integer.parseInt(session.getAttribute("user_id").toString()));
+		user.getAttendance().setLogin(isLogin);
+		attendanceService.setLoginByUserID(isLogin, user.getUserId());
+		model.addAttribute("attendance", user.getAttendance());
 		return "attendance";
 	}
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
-	public String attendance_login_logout() {
+	public String attendance_login_logout(Model model) {
 		User user = securityService.findLoggedInUser();
 		Attendance attendance = user.getAttendance();
+
+		model.addAttribute("attendance", attendance);
 		return "attendance";
 	}
 

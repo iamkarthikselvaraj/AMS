@@ -111,7 +111,7 @@ public class User implements java.io.Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
 	public Attendance getAttendance() {
 		return this.attendance;
 	}

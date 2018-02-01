@@ -9,7 +9,7 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link"
 				href="${contextPath}/attendance">Home</a></li>
-			<security:authorize access="hasRole('ROLE_FULL')">
+			<security:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item"><a class="nav-link"
 					href="${contextPath}/createUser">Create User</a></li>
 				<li class="nav-item"><a class="nav-link"

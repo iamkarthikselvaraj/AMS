@@ -1,15 +1,16 @@
 package com.app.ams.model;
-// default package
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 7:35:45 PM by Hibernate Tools 5.2.6.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Privilege implements java.io.Serializable {
 
 	private Integer privilegeId;
-	private Integer privilege;
+	private int privilege;
 	private String access;
 	private Date lastUpdated;
 	private Set<User> users = new HashSet<User>(0);
@@ -32,7 +33,11 @@ public class Privilege implements java.io.Serializable {
 	public Privilege() {
 	}
 
-	public Privilege(Integer privilege, String access, Date lastUpdated, Set<User> users) {
+	public Privilege(int privilege) {
+		this.privilege = privilege;
+	}
+
+	public Privilege(int privilege, String access, Date lastUpdated, Set<User> users) {
 		this.privilege = privilege;
 		this.access = access;
 		this.lastUpdated = lastUpdated;
@@ -51,12 +56,12 @@ public class Privilege implements java.io.Serializable {
 		this.privilegeId = privilegeId;
 	}
 
-	@Column(name = "privilege")
-	public Integer getPrivilege() {
+	@Column(name = "privilege", nullable = false)
+	public int getPrivilege() {
 		return this.privilege;
 	}
 
-	public void setPrivilege(Integer privilege) {
+	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
 	}
 
@@ -86,6 +91,12 @@ public class Privilege implements java.io.Serializable {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		return "Privilege [privilegeId=" + privilegeId + ", privilege=" + privilege + ", access=" + access
+				+ ", lastUpdated=" + lastUpdated + ", users=" + users + "]";
 	}
 
 }

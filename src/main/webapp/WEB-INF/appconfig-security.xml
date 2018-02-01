@@ -10,8 +10,8 @@
     <http auto-config="true">
         <intercept-url pattern="/" access="isAuthenticated()"/>
         <intercept-url pattern="/attendance" access="isAuthenticated()"/>
-<!--           <intercept-url pattern="/createUser" access="hasRole('ROLE_FULL')"/> -->
-                <intercept-url pattern="/listUsers" access="hasRole('ROLE_FULL')"/>
+<!--           <intercept-url pattern="/createUser" access="hasRole('ROLE_ADMIN')"/> -->
+                <intercept-url pattern="/listUsers" access="hasRole('ROLE_ADMIN')"/>
         <form-login login-page="/login" default-target-url="/attendance" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" logout-url="/logout"/>
     </http>

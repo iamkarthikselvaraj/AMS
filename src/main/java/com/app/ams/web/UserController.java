@@ -1,7 +1,6 @@
 package com.app.ams.web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +35,9 @@ public class UserController {
 		int isLogin;
 		if (attendance.getLogin() == 0) {
 			isLogin = 1;
+			// Report report = new Report(attendance, new Date(), "", new Date(), new
+			// Date(), 0, "");
+			// attendanceService.createReport(report);
 		} else {
 			isLogin = 0;
 		}

@@ -2,8 +2,6 @@ package com.app.ams.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.app.ams.model.Attendance;
 import com.app.ams.model.Privilege;
 import com.app.ams.model.User;
 import com.app.ams.service.AdminService;
@@ -36,8 +35,8 @@ public class AdminController {
 		if (bindingResult.hasErrors()) {
 			return "redirect:/createUser";
 		}
-
-		adminService.createUser(user);
+		Attendance attendance = new Attendance(user, 0);
+		adminService.createUser(attendance);
 
 		model.addAttribute("css", "success");
 		model.addAttribute("msg", "User added successfully!");

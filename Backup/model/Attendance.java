@@ -1,9 +1,11 @@
 package com.app.ams.model;
-// default package
 
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+// default package
+// Generated Jan 31, 2018 8:48:00 PM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -31,22 +34,30 @@ public class Attendance implements java.io.Serializable {
 	private int userId;
 	private Report report;
 	private User user;
-	private Integer login;
+	private int login;
 	private Date lastUpdated;
+	private Set<Report> reports = new HashSet<Report>(0);
 
 	public Attendance() {
 	}
 
-	public Attendance(User user, Integer login) {
+	public Attendance(User user, int login) {
 		this.user = user;
 		this.login = login;
 	}
 
-	public Attendance(Report report, User user, Integer login, Date lastUpdated) {
+	public Attendance(Report report, User user, int login) {
+		this.report = report;
+		this.user = user;
+		this.login = login;
+	}
+
+	public Attendance(Report report, User user, int login, Date lastUpdated, Set<Report> reports) {
 		this.report = report;
 		this.user = user;
 		this.login = login;
 		this.lastUpdated = lastUpdated;
+		this.reports = reports;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -63,7 +74,7 @@ public class Attendance implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "report_id")
+	@JoinColumn(name = "report_id", nullable = false)
 	public Report getReport() {
 		return this.report;
 	}
@@ -82,12 +93,12 @@ public class Attendance implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "login")
-	public Integer getLogin() {
+	@Column(name = "login", nullable = false)
+	public int getLogin() {
 		return this.login;
 	}
 
-	public void setLogin(Integer login) {
+	public void setLogin(int login) {
 		this.login = login;
 	}
 
@@ -99,6 +110,15 @@ public class Attendance implements java.io.Serializable {
 
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attendance")
+	public Set<Report> getReports() {
+		return this.reports;
+	}
+
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
 	}
 
 }

@@ -37,9 +37,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void createUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		userRepository.save(user);
+	public void createUser(Attendance attendance) {
+		attendance.getUser().setPassword(bCryptPasswordEncoder.encode(attendance.getUser().getPassword()));
+		attendanceRepository.save(attendance);
 
 	}
 

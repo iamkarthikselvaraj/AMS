@@ -1,13 +1,9 @@
 package com.app.ams.model;
-// default package
-
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+// Generated Jan 20, 2018 7:35:45 PM by Hibernate Tools 5.2.6.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,10 +32,8 @@ public class User implements java.io.Serializable {
 	private Privilege privilege;
 	private String username;
 	private String password;
-
 	private String passwordConfirm;
 	private Date lastUpdated;
-	private Set<Report> reports = new HashSet<Report>(0);
 	private Attendance attendance;
 
 	public User() {
@@ -51,13 +44,11 @@ public class User implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public User(Privilege privilege, String username, String password, Date lastUpdated, Set<Report> reports,
-			Attendance attendance) {
+	public User(Privilege privilege, String username, String password, Date lastUpdated, Attendance attendance) {
 		this.privilege = privilege;
 		this.username = username;
 		this.password = password;
 		this.lastUpdated = lastUpdated;
-		this.reports = reports;
 		this.attendance = attendance;
 	}
 
@@ -92,7 +83,7 @@ public class User implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "password", nullable = false, length = 254)
+	@Column(name = "password", nullable = false, length = 32)
 	public String getPassword() {
 		return this.password;
 	}
@@ -120,22 +111,20 @@ public class User implements java.io.Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Report> getReports() {
-		return this.reports;
-	}
-
-	public void setReports(Set<Report> reports) {
-		this.reports = reports;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
 	public Attendance getAttendance() {
 		return this.attendance;
 	}
 
 	public void setAttendance(Attendance attendance) {
 		this.attendance = attendance;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", privilege=" + privilege + ", username=" + username + ", password="
+				+ password + ", passwordConfirm=" + passwordConfirm + ", lastUpdated=" + lastUpdated + ", attendance="
+				+ attendance + "]";
 	}
 
 }

@@ -1,15 +1,18 @@
 package com.app.ams.model;
 // default package
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+
+// Generated Jan 31, 2018 8:48:00 PM by Hibernate Tools 5.0.6.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +29,7 @@ import javax.persistence.TemporalType;
 public class Report implements java.io.Serializable {
 
 	private Integer id;
-	private User user;
+	private Attendance attendance;
 	private Date date;
 	private String day;
 	private Date timeOfLogin;
@@ -39,21 +42,16 @@ public class Report implements java.io.Serializable {
 	public Report() {
 	}
 
-	public Report(User user) {
-		this.user = user;
-	}
-
-	public Report(User user, Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours,
-			String flag, Date lastUpdated, Set<Attendance> attendances) {
-		this.user = user;
+	public Report(Attendance attendance, Date date, String day, Date timeOfLogin, Date timeOfLogout,
+			Integer workedHours, String flag) {
+		this.attendance = attendance;
 		this.date = date;
 		this.day = day;
 		this.timeOfLogin = timeOfLogin;
 		this.timeOfLogout = timeOfLogout;
 		this.workedHours = workedHours;
 		this.flag = flag;
-		this.lastUpdated = lastUpdated;
-		this.attendances = attendances;
+
 	}
 
 	@Id
@@ -69,13 +67,13 @@ public class Report implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	public User getUser() {
-		return this.user;
+	@JoinColumn(name = "user_id")
+	public Attendance getAttendance() {
+		return this.attendance;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAttendance(Attendance attendance) {
+		this.attendance = attendance;
 	}
 
 	@Temporal(TemporalType.DATE)

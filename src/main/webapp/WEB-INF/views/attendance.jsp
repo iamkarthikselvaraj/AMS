@@ -15,6 +15,7 @@
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
 							<form:input path="login" type="hidden" />
+							<form:input path="userId" type="hidden" />
 							<button type="submit" class="btn btn-primary btn-block btn-width">
 								<strong>${attendance.login==0 ? "Login" : "Logout"}</strong>
 							</button>

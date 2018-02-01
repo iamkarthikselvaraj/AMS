@@ -9,7 +9,7 @@ import com.app.ams.model.User;
 public interface AdminService {
 	void createEmployee(Attendance attendance);
 
-	void createUser(User user);
+	void createUser(Attendance attendance);
 
 	void deleteByUserId(int id);
 

@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -42,11 +44,11 @@ public class Attendance implements java.io.Serializable {
 		this.login = login;
 	}
 
-	public Attendance(Report report, User user, Integer login, Date lastUpdated) {
+	public Attendance(Report report, Integer login) {
 		this.report = report;
-		this.user = user;
+
 		this.login = login;
-		this.lastUpdated = lastUpdated;
+
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -64,6 +66,7 @@ public class Attendance implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "report_id")
+	@Cascade({ CascadeType.ALL })
 	public Report getReport() {
 		return this.report;
 	}

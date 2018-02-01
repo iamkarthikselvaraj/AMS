@@ -1,5 +1,6 @@
 package com.app.ams.model;
 // default package
+
 // Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
@@ -41,6 +42,17 @@ public class Report implements java.io.Serializable {
 
 	public Report(User user) {
 		this.user = user;
+	}
+
+	public Report(Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours, String flag) {
+
+		this.date = date;
+		this.day = day;
+		this.timeOfLogin = timeOfLogin;
+		this.timeOfLogout = timeOfLogout;
+		this.workedHours = workedHours;
+		this.flag = flag;
+
 	}
 
 	public Report(User user, Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours,
@@ -146,6 +158,7 @@ public class Report implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
+
 	public Set<Attendance> getAttendances() {
 		return this.attendances;
 	}

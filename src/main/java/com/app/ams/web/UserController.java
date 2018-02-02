@@ -1,6 +1,9 @@
 package com.app.ams.web;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +50,15 @@ public class UserController {
 			attendance.setReport(report);
 			attendance.setLogin(1);
 		} else {
+			long diff = date.getTime() - attendance.getReport().getTimeOfLogin().getTime();
+			printDifference(attendance.getReport().getTimeOfLogin(), date);
+			System.out.println(diff);
+			Report report = attendance.getReport();
+			report.setTimeOfLogout(date);
+			report.setWorkedHours((int) diff / (60 * 60 * 1000));
 
-			attendance.setReport(new Report());
+			report.setUser(user);
+			attendance.setReport(report);
 			attendance.setLogin(0);
 		}
 		attendanceService.updateAttendance(attendance);
@@ -72,5 +82,27 @@ public class UserController {
 		List<Report> reports = userService.getReportsByUser(user);
 		model.addAttribute("reports", reports);
 		return "report";
+	}
+
+	public void printDifference(Date inTime, Date outTime) {
+
+		// milliseconds
+		long different = outTime.getTime() - inTime.getTime();
+
+		long secondsInMilli = 1000;
+		long minutesInMilli = secondsInMilli * 60;
+		long hoursInMilli = minutesInMilli * 60;
+		// long daysInMilli = hoursInMilli * 24;
+
+		long elapsedHours = different / hoursInMilli;
+		different = different % hoursInMilli;
+
+		long elapsedMinutes = different / minutesInMilli;
+		different = different % minutesInMilli;
+
+		long elapsedSeconds = different / secondsInMilli;
+
+		System.out.printf("%d hours, %d minutes, %d seconds%n", elapsedHours, elapsedMinutes, elapsedSeconds);
+
 	}
 }

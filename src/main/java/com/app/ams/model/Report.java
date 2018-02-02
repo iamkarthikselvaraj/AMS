@@ -53,17 +53,10 @@ public class Report implements java.io.Serializable {
 		this.timeOfLogin = timeOfLogin;
 	}
 
-	public Report(User user, Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours,
-			String flag, Date lastUpdated, Set<Attendance> attendances) {
-		this.user = user;
-		this.date = date;
-		this.day = day;
-		this.timeOfLogin = timeOfLogin;
+	public Report(Date timeOfLogout, Integer workedHours, String flag) {
 		this.timeOfLogout = timeOfLogout;
 		this.workedHours = workedHours;
 		this.flag = flag;
-		this.lastUpdated = lastUpdated;
-		this.attendances = attendances;
 	}
 
 	@Id

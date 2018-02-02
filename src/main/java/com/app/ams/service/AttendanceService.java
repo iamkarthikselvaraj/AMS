@@ -4,7 +4,6 @@ import com.app.ams.model.Attendance;
 import com.app.ams.model.Report;
 
 public interface AttendanceService {
-	Attendance findByUserID(int user_id);
 
 	void createReport(Report report);
 

@@ -36,8 +36,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
-	public String attendance_login_logout_Post(@ModelAttribute("attendance") Attendance attendance, Model model) {
+	public String attendance_login_logout_Post(Model model) {
 		User user = securityService.findLoggedInUser();
+		Attendance attendance = userService.getAttendance(user.getUserId());
+
 		Date date = new Date();
 		if (attendance.getLogin() == 0) {
 			Report report = new Report(date, LocalDate.now().getDayOfWeek().name(), date);
@@ -45,25 +47,21 @@ public class UserController {
 			attendance.setReport(report);
 			attendance.setLogin(1);
 		} else {
-			Attendance a = user.getAttendance();
-			System.out.println(a.getReport().getId());
-			// Report report = userService.findByAttendance(attendance);
 
-			// System.out.println(report.getTimeOfLogin());
+			attendance.setReport(new Report());
 			attendance.setLogin(0);
 		}
 		attendanceService.updateAttendance(attendance);
-		user.setAttendance(attendance);
 
-		model.addAttribute("attendance", user.getAttendance());
+		model.addAttribute("attendance", attendance);
 		return "attendance";
 	}
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.GET)
-	public String attendance_login_logout(Model model, final RedirectAttributes redirectAttributes) {
+	public String attendance_login_logout(Model model) {
 		User user = securityService.findLoggedInUser();
-		Attendance attendance = user.getAttendance();
-		redirectAttributes.addFlashAttribute("attendance", attendance);
+		Attendance attendance = userService.getAttendance(user.getUserId());
+		model.addAttribute("attendance", attendance);
 
 		return "attendance";
 	}

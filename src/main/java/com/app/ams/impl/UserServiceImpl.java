@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.ams.model.Attendance;
 import com.app.ams.model.Report;
 import com.app.ams.model.User;
+import com.app.ams.repository.AttendanceRepo;
 import com.app.ams.repository.ReportRepo;
 import com.app.ams.repository.UserRepo;
 import com.app.ams.service.UserService;
@@ -17,6 +19,8 @@ public class UserServiceImpl implements UserService {
 	private UserRepo userRepository;
 	@Autowired
 	private ReportRepo reportRepository;
+	@Autowired
+	private AttendanceRepo attendanceRepository;
 
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
@@ -28,9 +32,10 @@ public class UserServiceImpl implements UserService {
 		return reportRepository.findAllByUser(user);
 	}
 
-	// @Override
-	// public Report findByAttendance(Attendance attendance) {
-	//
-	// return reportRepository.findByAttendance(attendance);
-	// }
+	@Override
+	public Attendance getAttendance(Integer userId) {
+		// TODO Auto-generated method stub
+		return attendanceRepository.findByUserId(userId);
+	}
+
 }

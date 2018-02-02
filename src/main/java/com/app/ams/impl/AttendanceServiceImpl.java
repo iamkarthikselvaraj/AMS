@@ -17,11 +17,6 @@ public class AttendanceServiceImpl implements AttendanceService {
 	private ReportRepo reportRepository;
 
 	@Override
-	public Attendance findByUserID(int emp_id) {
-		return attendanceRepository.findByUserId(emp_id);
-	}
-
-	@Override
 	public void setLoginByUserID(int isLogin, int user_id) {
 		attendanceRepository.setLoginByUserID(isLogin, user_id);
 	}

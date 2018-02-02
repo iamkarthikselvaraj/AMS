@@ -5,6 +5,7 @@ package com.app.ams.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,8 +63,9 @@ public class Attendance implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "report_id")
+
 	public Report getReport() {
 		return this.report;
 	}

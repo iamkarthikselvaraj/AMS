@@ -1,7 +1,7 @@
 package com.app.ams.model;
 // default package
 
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+// Generated Feb 2, 2018 9:18:58 AM by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
 
@@ -18,8 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -44,11 +42,11 @@ public class Attendance implements java.io.Serializable {
 		this.login = login;
 	}
 
-	public Attendance(Report report, Integer login) {
+	public Attendance(Report report, User user, Integer login, Date lastUpdated) {
 		this.report = report;
-
+		this.user = user;
 		this.login = login;
-
+		this.lastUpdated = lastUpdated;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -66,7 +64,6 @@ public class Attendance implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "report_id")
-	@Cascade({ CascadeType.ALL })
 	public Report getReport() {
 		return this.report;
 	}

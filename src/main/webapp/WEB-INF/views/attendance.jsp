@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!--Panel-->
-<form:form modelAttribute="attendance" method="POST"
+<form:form method="POST"
 	action="${contextPath}/attendance" class="form-signin">
 	<div class="container-fluid">
 
@@ -14,8 +14,8 @@
 					<div class="card text-center" style="max-width: 500px">
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
-							<form:input path="login" type="hidden" />
-							<form:input path="userId" type="hidden" />
+<%-- 							<form:input path="login" type="hidden" /> --%>
+<%-- 							<form:input path="userId" type="hidden" /> --%>
 							<button type="submit" class="btn btn-primary btn-block btn-width">
 								<strong>${attendance.login==0 ? "Login" : "Logout"}</strong>
 							</button>

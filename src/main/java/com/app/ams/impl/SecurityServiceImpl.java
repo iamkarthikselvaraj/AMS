@@ -14,8 +14,9 @@ public class SecurityServiceImpl implements SecurityService {
 	public User findLoggedInUser() {
 		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
-		User user = userDetails.getUser();
-
-		return user;
+		if (userDetails != null) {
+			return userDetails.getUser();
+		}
+		return null;
 	}
 }

@@ -9,13 +9,12 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>User Id</th>
-				<th>Date</th>
+								<th>Date</th>
 				<th>Day</th>
 				<th>Time of Login</th>
 				<th>Time of Logout</th>
 				<th>Worked Hours</th>
-				<th>Comments</th>
+<!-- 				<th>Comments</th> -->
 				<th>Flag</th>
 			</tr>
 		</thead>
@@ -23,13 +22,12 @@
 			<c:forEach var="report" items="${reports}">
 				<tr>
 					<th scope="row">${report.id}</th>
-					<td>${report.attendance.userId}</td>
 					<td>${report.date}</td>
 					<td>${report.day}</td>
 					<td>${report.timeOfLogin}</td>
 					<td>${report.timeOfLogout}</td>
 					<td>${report.workedHours}</td>
-					<td>${report.comments}</td>
+<%-- 					<td>${report.comments}</td> --%>
 					<td>${report.flag}</td>
 				</tr>
 			</c:forEach>

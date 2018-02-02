@@ -1,16 +1,18 @@
 package com.app.ams.model;
 // default package
 
-// Generated Feb 1, 2018 8:53:39 AM by Hibernate Tools 5.0.6.Final
+// Generated Feb 2, 2018 9:18:58 AM by Hibernate Tools 5.0.6.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,15 +46,11 @@ public class Report implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public Report(Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours, String flag) {
-
+	public Report(Date date, String day, Date timeOfLogin) {
+		super();
 		this.date = date;
 		this.day = day;
 		this.timeOfLogin = timeOfLogin;
-		this.timeOfLogout = timeOfLogout;
-		this.workedHours = workedHours;
-		this.flag = flag;
-
 	}
 
 	public Report(User user, Date date, String day, Date timeOfLogin, Date timeOfLogout, Integer workedHours,
@@ -158,7 +156,6 @@ public class Report implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
-
 	public Set<Attendance> getAttendances() {
 		return this.attendances;
 	}

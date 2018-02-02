@@ -1,5 +1,7 @@
 package com.app.ams.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,7 +41,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
-	public String attendance_login_logout_Post(Model model) {
+	public String attendance_login_logout_Post(Model model) throws ParseException {
 		User user = securityService.findLoggedInUser();
 		Attendance attendance = userService.getAttendance(user.getUserId());
 
@@ -50,12 +52,14 @@ public class UserController {
 			attendance.setReport(report);
 			attendance.setLogin(1);
 		} else {
-			long diff = date.getTime() - attendance.getReport().getTimeOfLogin().getTime();
-			printDifference(attendance.getReport().getTimeOfLogin(), date);
-			System.out.println(diff);
+			// long diff = date.getTime() -
+			// attendance.getReport().getTimeOfLogin().getTime();
+			String workedHours = TimeDiff(attendance.getReport().getTimeOfLogin(),
+					new SimpleDateFormat("HH:mm:ss").parse(new SimpleDateFormat("HH:mm:ss").format(date)));
+			// System.out.println(diff);
 			Report report = attendance.getReport();
+			report.setWorkedHours(workedHours);
 			report.setTimeOfLogout(date);
-			report.setWorkedHours((int) diff / (60 * 60 * 1000));
 
 			report.setUser(user);
 			attendance.setReport(report);
@@ -84,7 +88,7 @@ public class UserController {
 		return "report";
 	}
 
-	public void printDifference(Date inTime, Date outTime) {
+	public String TimeDiff(Date inTime, Date outTime) {
 
 		// milliseconds
 		long different = outTime.getTime() - inTime.getTime();
@@ -100,9 +104,9 @@ public class UserController {
 		long elapsedMinutes = different / minutesInMilli;
 		different = different % minutesInMilli;
 
-		long elapsedSeconds = different / secondsInMilli;
+		// long elapsedSeconds = different / secondsInMilli;
 
-		System.out.printf("%d hours, %d minutes, %d seconds%n", elapsedHours, elapsedMinutes, elapsedSeconds);
+		return String.format("%d:%d", elapsedHours, elapsedMinutes);
 
 	}
 }

@@ -34,7 +34,7 @@ public class Report implements java.io.Serializable {
 	private String day;
 	private Date timeOfLogin;
 	private Date timeOfLogout;
-	private Integer workedHours;
+	private String workedHours;
 	private String flag;
 	private Date lastUpdated;
 	private Set<Attendance> attendances = new HashSet<Attendance>(0);
@@ -53,7 +53,7 @@ public class Report implements java.io.Serializable {
 		this.timeOfLogin = timeOfLogin;
 	}
 
-	public Report(Date timeOfLogout, Integer workedHours, String flag) {
+	public Report(Date timeOfLogout, String workedHours, String flag) {
 		this.timeOfLogout = timeOfLogout;
 		this.workedHours = workedHours;
 		this.flag = flag;
@@ -121,11 +121,11 @@ public class Report implements java.io.Serializable {
 	}
 
 	@Column(name = "worked_hours")
-	public Integer getWorkedHours() {
+	public String getWorkedHours() {
 		return this.workedHours;
 	}
 
-	public void setWorkedHours(Integer workedHours) {
+	public void setWorkedHours(String workedHours) {
 		this.workedHours = workedHours;
 	}
 

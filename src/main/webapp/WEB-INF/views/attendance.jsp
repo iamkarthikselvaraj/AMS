@@ -4,18 +4,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!--Panel-->
-<form:form method="POST"
-	action="${contextPath}/attendance" class="form-signin">
+<form:form method="POST" action="${contextPath}/attendance"
+	class="form-signin">
 	<div class="container-fluid">
 
 		<table class="" style="width: 100%; height: 85%;">
 			<tr>
-				<td align="center">
+				<td align="center"><c:if test="${not empty msg}">
+						<div class="alert alert-${css} alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>${msg}</strong>
+						</div>
+					</c:if>
 					<div class="card text-center" style="max-width: 500px">
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
-<%-- 							<form:input path="login" type="hidden" /> --%>
-<%-- 							<form:input path="userId" type="hidden" /> --%>
+							<%-- 							<form:input path="login" type="hidden" /> --%>
+							<%-- 							<form:input path="userId" type="hidden" /> --%>
 							<button type="submit" class="btn btn-primary btn-block btn-width">
 								<strong>${attendance.login==0 ? "Login" : "Logout"}</strong>
 							</button>
@@ -25,8 +33,7 @@
 								Report</a> &nbsp;|&nbsp; <a id="a_ins" href="#"
 								style="text-decoration: none;">Instructions</a>
 						</p>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<div class="row justify-content-md-center">

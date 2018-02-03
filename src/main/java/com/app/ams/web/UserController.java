@@ -2,10 +2,7 @@ package com.app.ams.web;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.ams.model.Attendance;
 import com.app.ams.model.Report;
@@ -44,13 +39,14 @@ public class UserController {
 	public String attendance_login_logout_Post(Model model) throws ParseException {
 		User user = securityService.findLoggedInUser();
 		Attendance attendance = userService.getAttendance(user.getUserId());
-
+		String message = "";
 		Date date = new Date();
 		if (attendance.getLogin() == 0) {
 			Report report = new Report(date, LocalDate.now().getDayOfWeek().name(), date);
 			report.setUser(user);
 			attendance.setReport(report);
 			attendance.setLogin(1);
+			message = "You have successfully logged in";
 		} else {
 			// long diff = date.getTime() -
 			// attendance.getReport().getTimeOfLogin().getTime();
@@ -64,8 +60,11 @@ public class UserController {
 			report.setUser(user);
 			attendance.setReport(report);
 			attendance.setLogin(0);
+			message = "You have successfully logged out";
 		}
 		attendanceService.updateAttendance(attendance);
+		model.addAttribute("css", "success");
+		model.addAttribute("msg", message);
 
 		model.addAttribute("attendance", attendance);
 		return "attendance";

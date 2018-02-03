@@ -1,7 +1,7 @@
 package com.app.ams.model;
 // default package
 
-// Generated Feb 2, 2018 9:18:58 AM by Hibernate Tools 5.0.6.Final
+// Generated Feb 3, 2018 8:44:04 AM by Hibernate Tools 5.0.6.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -36,14 +36,16 @@ public class Report implements java.io.Serializable {
 	private Date timeOfLogout;
 	private String workedHours;
 	private String flag;
+	private String comments;
 	private Date lastUpdated;
 	private Set<Attendance> attendances = new HashSet<Attendance>(0);
 
 	public Report() {
 	}
 
-	public Report(User user) {
+	public Report(User user, Date date) {
 		this.user = user;
+		this.date = date;
 	}
 
 	public Report(Date date, String day, Date timeOfLogin) {
@@ -53,10 +55,18 @@ public class Report implements java.io.Serializable {
 		this.timeOfLogin = timeOfLogin;
 	}
 
-	public Report(Date timeOfLogout, String workedHours, String flag) {
+	public Report(User user, Date date, String day, Date timeOfLogin, Date timeOfLogout, String workedHours,
+			String flag, String comments, Date lastUpdated, Set<Attendance> attendances) {
+		this.user = user;
+		this.date = date;
+		this.day = day;
+		this.timeOfLogin = timeOfLogin;
 		this.timeOfLogout = timeOfLogout;
 		this.workedHours = workedHours;
 		this.flag = flag;
+		this.comments = comments;
+		this.lastUpdated = lastUpdated;
+		this.attendances = attendances;
 	}
 
 	@Id
@@ -82,7 +92,7 @@ public class Report implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date", length = 10)
+	@Column(name = "date", nullable = false, length = 10)
 	public Date getDate() {
 		return this.date;
 	}
@@ -120,7 +130,7 @@ public class Report implements java.io.Serializable {
 		this.timeOfLogout = timeOfLogout;
 	}
 
-	@Column(name = "worked_hours")
+	@Column(name = "worked_hours", length = 15)
 	public String getWorkedHours() {
 		return this.workedHours;
 	}
@@ -136,6 +146,15 @@ public class Report implements java.io.Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	@Column(name = "Comments", length = 65535)
+	public String getComments() {
+		return this.comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

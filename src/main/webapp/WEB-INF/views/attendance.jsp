@@ -6,7 +6,7 @@
 <!--Panel-->
 <form:form method="POST" action="${contextPath}/attendance"
 	class="form-signin">
-	<div class="container-fluid">
+	<div class="container-fluid auth-form">
 
 		<table class="" style="width: 100%; height: 85%;">
 			<tr>

@@ -38,6 +38,11 @@
 	margin-top: auto;
 	margin-bottom: auto;
 }
+
+.auth-form {
+    width: 514px;
+    margin: 0 auto;
+}
 </style>
 <title><tiles:getAsString name="title" /></title>
 

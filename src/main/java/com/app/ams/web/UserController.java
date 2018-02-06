@@ -40,30 +40,42 @@ public class UserController {
 		User user = securityService.findLoggedInUser();
 		Attendance attendance = userService.getAttendance(user.getUserId());
 		String message = "";
+		String css = "";
+		boolean isSuccess = false;
 		Date date = new Date();
 		if (attendance.getLogin() == 0) {
 			Report report = new Report(date, LocalDate.now().getDayOfWeek().name(), date);
 			report.setUser(user);
 			attendance.setReport(report);
 			attendance.setLogin(1);
-			message = "You have successfully logged in";
-		} else {
-			// long diff = date.getTime() -
-			// attendance.getReport().getTimeOfLogin().getTime();
-			String workedHours = TimeDiff(attendance.getReport().getTimeOfLogin(),
-					new SimpleDateFormat("HH:mm:ss").parse(new SimpleDateFormat("HH:mm:ss").format(date)));
-			// System.out.println(diff);
-			Report report = attendance.getReport();
-			report.setWorkedHours(workedHours);
-			report.setTimeOfLogout(date);
 
-			report.setUser(user);
-			attendance.setReport(report);
-			attendance.setLogin(0);
-			message = "You have successfully logged out";
+			message = "You have successfully logged in";
+			isSuccess = true;
+		} else {
+			Object[] obj = TimeDiff(attendance.getReport().getTimeOfLogin(),
+					new SimpleDateFormat("HH:mm:ss").parse(new SimpleDateFormat("HH:mm:ss").format(date)));
+			String workedHours = obj[0].toString();
+			if ((boolean) obj[1]) {
+				Report report = attendance.getReport();
+				report.setWorkedHours(workedHours);
+				report.setTimeOfLogout(date);
+
+				report.setUser(user);
+				attendance.setReport(report);
+				attendance.setLogin(0);
+				message = "You have successfully logged out";
+			} else {
+				isSuccess = false;
+				message = "You still have " + obj[2].toString()
+						+ " Hours to logout, If you want to logout before please leave your comments.";
+			}
+
 		}
-		attendanceService.updateAttendance(attendance);
-		model.addAttribute("css", "success");
+		if (isSuccess) {
+			attendanceService.updateAttendance(attendance);
+		}
+		css = isSuccess ? "success" : "warning";
+		model.addAttribute("css", css);
 		model.addAttribute("msg", message);
 
 		model.addAttribute("attendance", attendance);
@@ -87,10 +99,13 @@ public class UserController {
 		return "report";
 	}
 
-	public String TimeDiff(Date inTime, Date outTime) {
-
+	public Object[] TimeDiff(Date inTime, Date outTime) {
+		Object obj[] = new Object[3];
+		long workingHoursInMills = 32400000;
 		// milliseconds
 		long different = outTime.getTime() - inTime.getTime();
+		long totaldiff = different;
+		long timeLeft = workingHoursInMills - different;
 
 		long secondsInMilli = 1000;
 		long minutesInMilli = secondsInMilli * 60;
@@ -99,13 +114,23 @@ public class UserController {
 
 		long elapsedHours = different / hoursInMilli;
 		different = different % hoursInMilli;
-
+		long leftHours = timeLeft / hoursInMilli;
+		timeLeft = timeLeft % hoursInMilli;
 		long elapsedMinutes = different / minutesInMilli;
-		different = different % minutesInMilli;
+		long leftMinutes = timeLeft / minutesInMilli;
+		// different = different % minutesInMilli;
 
-		// long elapsedSeconds = different / secondsInMilli;
+		boolean isWorkingHoursCompleted = totaldiff >= workingHoursInMills ? true : false;
 
-		return String.format("%d:%d", elapsedHours, elapsedMinutes);
+		// if (!isWorkingHoursCompleted) {
+		// reminingHours = elapsedHours - workingHoursInMills;
+		// reminingMin = elapsedMinutes - 60;
+
+		// }
+		obj[0] = String.format("%d:%d", elapsedHours, elapsedMinutes);
+		obj[1] = isWorkingHoursCompleted;
+		obj[2] = String.format("%d:%d", leftHours, leftMinutes);
+		return obj;
 
 	}
 }

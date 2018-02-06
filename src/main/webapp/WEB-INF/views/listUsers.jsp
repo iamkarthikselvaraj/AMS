@@ -33,9 +33,9 @@
 						<%-- 						<form action="${contextPath}/users/${user.userId}/delete"  method="post"><input class="btn btn-danger" type="submit" value="Delete"/></form> --%>
 						<%-- 						<form action="${contextPath}/users/${user.userId}/update"  method="post"><input class="btn btn-danger" type="submit" value="Update"/></form> --%>
 						<spring:url value="/users/${user.userId}/delete" var="deleteUrl" />
-						<spring:url value="/users/${user.userId}/update" var="updateUrl" />
-						<button class="btn btn-primary"
-							onclick="location.href='${updateUrl}'">Update</button>
+<%-- 						<spring:url value="/users/${user.userId}/update" var="updateUrl" /> --%>
+<!-- 						<button class="btn btn-primary" -->
+<%-- 							onclick="location.href='${updateUrl}'">Update</button> --%>
 						<button class="btn btn-danger"
 							onclick="this.disabled=true;post('${deleteUrl}')">Delete</button>
 					</td>

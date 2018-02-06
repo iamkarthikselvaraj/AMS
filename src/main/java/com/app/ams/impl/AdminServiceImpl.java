@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.app.ams.model.Attendance;
 import com.app.ams.model.Privilege;
+import com.app.ams.model.Report;
 import com.app.ams.model.User;
 import com.app.ams.repository.AttendanceRepo;
 import com.app.ams.repository.PrivilegeRepo;
+import com.app.ams.repository.ReportRepo;
 import com.app.ams.repository.UserRepo;
 import com.app.ams.service.AdminService;
 
@@ -22,6 +24,8 @@ public class AdminServiceImpl implements AdminService {
 	private PrivilegeRepo privilegeRepository;
 	@Autowired
 	private UserRepo userRepository;
+	@Autowired
+	private ReportRepo reportRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -58,6 +62,11 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteByUserId(int id) {
 		userRepository.deleteByUserId(id);
 
+	}
+
+	@Override
+	public List<Report> getAllReport() {
+		return reportRepository.findAll();
 	}
 
 }

@@ -31,7 +31,9 @@
 	border-radius: 14px;
 	text-align: center;
 }
-
+.hidden {
+display: none;
+}
 .marginAutoLR {
 	margin-right: auto;
 	margin-left: auto;

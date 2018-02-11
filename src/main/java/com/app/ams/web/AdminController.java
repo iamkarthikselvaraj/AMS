@@ -1,5 +1,6 @@
 package com.app.ams.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.ams.model.Attendance;
 import com.app.ams.model.Privilege;
+import com.app.ams.model.Report;
 import com.app.ams.model.User;
 import com.app.ams.service.AdminService;
+import com.app.ams.service.UserService;
 import com.app.ams.validator.UserValidator;
 
 @Controller
@@ -25,6 +28,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private UserValidator userValidator;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 
@@ -72,4 +77,9 @@ public class AdminController {
 
 	}
 
+	@RequestMapping(value = "/exportReport", method = RequestMethod.GET)
+	public ModelAndView exportReport() {
+		List<Report> reports = userService.findByDateBetween(new Date(), new Date());
+		return new ModelAndView("excelView", "listReport", reports);
+	}
 }

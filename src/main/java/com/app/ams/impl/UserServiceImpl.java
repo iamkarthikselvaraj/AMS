@@ -1,5 +1,6 @@
 package com.app.ams.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,17 @@ public class UserServiceImpl implements UserService {
 		return attendanceRepository.findByUserId(userId);
 	}
 	//
+
+	@Override
+	public List<Report> findByDateBetween(Date start, Date end) {
+		// TODO Auto-generated method stub
+		return reportRepository.findByDateBetween(start, end);
+	}
+
+	@Override
+	public Report findFirstByDateAndUser(Date date, User user) {
+		// TODO Auto-generated method stub
+		return reportRepository.findFirstByDateAndUser(date, user);
+	}
+
 }

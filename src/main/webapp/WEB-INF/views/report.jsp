@@ -19,9 +19,11 @@
 			</tr>
 		</thead>
 		<tbody>
+		<c:set var="count" value="0" scope="page" />
 			<c:forEach var="report" items="${reports}">
+			<c:set var="count" value="${count + 1}" scope="page"/>
 				<tr>
-					<th scope="row">${report.id}</th>
+					<th scope="row">${count}</th>
 					<td>${report.date}</td>
 					<td>${report.day}</td>
 					<td>${report.timeOfLogin}</td>

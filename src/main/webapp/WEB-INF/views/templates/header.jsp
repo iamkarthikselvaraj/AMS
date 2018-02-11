@@ -14,6 +14,8 @@
 					href="${contextPath}/createUser">Create User</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextPath}/listUsers">List User</a></li>
+					<li class="nav-item"><a class="nav-link"
+					href="${contextPath}/exportReport">Export Report</a></li>
 			</security:authorize>
 		</ul>
 		<ul class="navbar-nav ml-auto">

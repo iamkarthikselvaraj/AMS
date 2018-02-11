@@ -37,20 +37,29 @@ public class UserController {
 
 	@RequestMapping(value = "/attendance", method = RequestMethod.POST)
 	public String attendance_login_logout_Post(Model model) throws ParseException {
+
 		User user = securityService.findLoggedInUser();
+
 		Attendance attendance = userService.getAttendance(user.getUserId());
 		String message = "";
 		String css = "";
 		boolean isSuccess = false;
+		// if(attendance.getReport().)
 		Date date = new Date();
 		if (attendance.getLogin() == 0) {
-			Report report = new Report(date, LocalDate.now().getDayOfWeek().name(), date);
-			report.setUser(user);
-			attendance.setReport(report);
-			attendance.setLogin(1);
+			Report report = userService.findFirstByDateAndUser(new Date(), user);
+			if (report == null) {
+				report = new Report(date, LocalDate.now().getDayOfWeek().name(), date);
+				report.setUser(user);
+				attendance.setReport(report);
+				attendance.setLogin(1);
 
-			message = "You have successfully logged in";
-			isSuccess = true;
+				message = "You have successfully logged in";
+				isSuccess = true;
+			} else {
+				message = "You can not login immediately after logout";
+				isSuccess = false;
+			}
 		} else {
 			Object[] obj = TimeDiff(attendance.getReport().getTimeOfLogin(), date);
 			String workedHours = obj[0].toString();
@@ -85,6 +94,7 @@ public class UserController {
 
 	@RequestMapping(value = "/attendance/Comments", method = RequestMethod.POST)
 	public String attendance_logout_Comments(HttpServletRequest request, Model model) throws ParseException {
+
 		User user = securityService.findLoggedInUser();
 		Attendance attendance = userService.getAttendance(user.getUserId());
 		String message = "";

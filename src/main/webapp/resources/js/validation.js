@@ -15,7 +15,20 @@ $(document).ready(function() {
 		}
 	});
 });
-
+$(document).ready(function() {
+	$('#commentsForm').validate({ // initialize the plugin
+		rules : {
+			Comments : {
+				required : true
+			}
+		},
+		messages : {
+			Comments : {
+				required : "Please leave your comments"
+			}
+		}
+	});
+});
 $(document).ready(function() {
 	$('#createUserform').validate({ // initialize the plugin
 		rules : {

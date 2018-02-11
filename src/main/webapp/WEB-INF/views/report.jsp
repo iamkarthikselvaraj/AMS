@@ -15,7 +15,7 @@
 				<th>Time of Logout</th>
 				<th>Worked Hours</th>
 <!-- 				<th>Comments</th> -->
-				<th>Flag</th>
+<!-- 				<th>Flag</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +28,7 @@
 					<td>${report.timeOfLogout}</td>
 					<td>${report.workedHours}</td>
 <%-- 					<td>${report.comments}</td> --%>
-					<td>${report.flag}</td>
+<%-- 					<td>${report.flag}</td> --%>
 				</tr>
 			</c:forEach>
 

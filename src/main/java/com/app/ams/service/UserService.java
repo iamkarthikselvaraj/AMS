@@ -7,7 +7,7 @@ import com.app.ams.model.Report;
 import com.app.ams.model.User;
 
 public interface UserService {
-	User findByUsername(String username);
+	User findByEmail(String email);
 
 	Attendance getAttendance(Integer userId);
 

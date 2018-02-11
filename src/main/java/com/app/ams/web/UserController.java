@@ -1,13 +1,13 @@
 package com.app.ams.web;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +52,7 @@ public class UserController {
 			message = "You have successfully logged in";
 			isSuccess = true;
 		} else {
-			Object[] obj = TimeDiff(attendance.getReport().getTimeOfLogin(),
-					new SimpleDateFormat("HH:mm:ss").parse(new SimpleDateFormat("HH:mm:ss").format(date)));
+			Object[] obj = TimeDiff(attendance.getReport().getTimeOfLogin(), date);
 			String workedHours = obj[0].toString();
 			if ((boolean) obj[1]) {
 				Report report = attendance.getReport();
@@ -63,12 +62,48 @@ public class UserController {
 				report.setUser(user);
 				attendance.setReport(report);
 				attendance.setLogin(0);
+				isSuccess = true;
 				message = "You have successfully logged out";
 			} else {
 				isSuccess = false;
+				model.addAttribute("showComments", "showComments");
 				message = "You still have " + obj[2].toString()
 						+ " Hours to logout, If you want to logout before please leave your comments.";
 			}
+
+		}
+		if (isSuccess) {
+			attendanceService.updateAttendance(attendance);
+		}
+		css = isSuccess ? "success" : "warning";
+		model.addAttribute("css", css);
+		model.addAttribute("msg", message);
+
+		model.addAttribute("attendance", attendance);
+		return "attendance";
+	}
+
+	@RequestMapping(value = "/attendance/Comments", method = RequestMethod.POST)
+	public String attendance_logout_Comments(HttpServletRequest request, Model model) throws ParseException {
+		User user = securityService.findLoggedInUser();
+		Attendance attendance = userService.getAttendance(user.getUserId());
+		String message = "";
+		String css = "";
+		boolean isSuccess = false;
+		Date date = new Date();
+		if (attendance.getLogin() == 0) {
+
+		} else {
+			String comments = request.getParameter("Comments");
+			Report report = attendance.getReport();
+			report.setWorkedHours("9:0");
+			report.setTimeOfLogout(date);
+			report.setComments(comments);
+			report.setUser(user);
+			attendance.setReport(report);
+			attendance.setLogin(0);
+			isSuccess = true;
+			message = "You have successfully logged out";
 
 		}
 		if (isSuccess) {
@@ -101,36 +136,31 @@ public class UserController {
 
 	public Object[] TimeDiff(Date inTime, Date outTime) {
 		Object obj[] = new Object[3];
-		long workingHoursInMills = 32400000;
-		// milliseconds
-		long different = outTime.getTime() - inTime.getTime();
-		long totaldiff = different;
-		long timeLeft = workingHoursInMills - different;
-
-		long secondsInMilli = 1000;
-		long minutesInMilli = secondsInMilli * 60;
-		long hoursInMilli = minutesInMilli * 60;
-		// long daysInMilli = hoursInMilli * 24;
-
-		long elapsedHours = different / hoursInMilli;
-		different = different % hoursInMilli;
-		long leftHours = timeLeft / hoursInMilli;
-		timeLeft = timeLeft % hoursInMilli;
-		long elapsedMinutes = different / minutesInMilli;
-		long leftMinutes = timeLeft / minutesInMilli;
-		// different = different % minutesInMilli;
-
-		boolean isWorkingHoursCompleted = totaldiff >= workingHoursInMills ? true : false;
-
-		// if (!isWorkingHoursCompleted) {
-		// reminingHours = elapsedHours - workingHoursInMills;
-		// reminingMin = elapsedMinutes - 60;
-
-		// }
-		obj[0] = String.format("%d:%d", elapsedHours, elapsedMinutes);
-		obj[1] = isWorkingHoursCompleted;
-		obj[2] = String.format("%d:%d", leftHours, leftMinutes);
+		long workingHours = 32400000;
+		Interval interval;
+		if ((outTime.getTime() > (inTime.getTime() + workingHours))) {
+			interval = new Interval(inTime.getTime(), outTime.getTime());
+			org.joda.time.Period period = interval.toPeriod();
+			if (period.getDays() > 0) {
+				obj[0] = String.format("%d:%d", "09", "00");
+			} else {
+				obj[0] = String.format("%d:%d", period.getHours(), period.getMinutes());
+			}
+			System.out.printf("%d years, %d months, %d days, %d hours, %d minutes, %d seconds%n", period.getYears(),
+					period.getMonths(), period.getDays(), period.getHours(), period.getMinutes(), period.getSeconds());
+			obj[1] = true;
+			obj[2] = "";
+		} else {
+			interval = new Interval(outTime.getTime(), inTime.getTime() + workingHours);
+			org.joda.time.Period period = interval.toPeriod();
+			System.out.printf("%d years, %d months, %d days, %d hours, %d minutes, %d seconds%n", period.getYears(),
+					period.getMonths(), period.getDays(), period.getHours(), period.getMinutes(), period.getSeconds());
+			obj[0] = "";
+			obj[1] = false;
+			obj[2] = String.format("%d:%d", period.getHours(), period.getMinutes());
+		}
 		return obj;
 
 	}
+
 }

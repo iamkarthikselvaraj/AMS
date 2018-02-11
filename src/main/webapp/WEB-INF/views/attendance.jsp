@@ -4,21 +4,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!--Panel-->
-<form:form method="POST" action="${contextPath}/attendance"
-	class="form-signin">
-	<div class="container-fluid auth-form">
 
-		<table class="" style="width: 100%; height: 85%;">
-			<tr>
-				<td align="center"><c:if test="${not empty msg}">
-						<div class="alert alert-${css} alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<strong>${msg}</strong>
-						</div>
-					</c:if>
+<div class="container-fluid auth-form">
+
+	<table class="" style="width: 100%; height: 85%;">
+		<tr>
+			<td align="center"><c:if test="${not empty msg}">
+					<div class="alert alert-${css} alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>${msg}</strong>
+					</div>
+				</c:if> <form:form method="POST" action="${contextPath}/attendance"
+					class="form-signin">
 					<div class="card text-center" style="max-width: 500px">
 						<div class="card-header">Attendance Login</div>
 						<div class="card-body marginAutoLR">
@@ -33,14 +33,36 @@
 								Report</a> &nbsp;|&nbsp; <a id="a_ins" href="#"
 								style="text-decoration: none;">Instructions</a>
 						</p>
-					</div></td>
-			</tr>
-		</table>
-		<div class="row justify-content-md-center">
-			<div class="col" style="text-align: center;"></div>
-		</div>
-	</div>
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-</form:form>
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form:form></td>
+		</tr>
+		<c:if test="${not empty showComments}">
+		<tr>
+			<td><form:form method="POST"
+					action="${contextPath}/attendance/Comments" id="commentsForm" class="form-group">
+					<div class="form-group">
+						<label for="Comments">Comments</label>
+						<textarea class="form-control" name="Comments" rows="3"></textarea>
+						<button type="submit" class="btn float-right"
+							style="margin-top: 5px;">
+							<strong>Submit</strong>
+						</button>
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form:form></td>
+		</tr>
+</c:if>
+	</table>
+	<!-- 		<div class="row justify-content-md-center"> -->
+	<!-- 			<div class="col" style="text-align: center;"></div> -->
+	<!-- 		</div> -->
+
+</div>
+
+
+
+
 <!--/.Panel-->

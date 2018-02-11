@@ -33,7 +33,7 @@ public class AdminController {
 		List<Privilege> privileges = adminService.getPrivilegeList();
 		model.addAttribute("privilegeList", privileges);
 		if (bindingResult.hasErrors()) {
-			return "redirect:/createUser";
+			return "createUser";
 		}
 		Attendance attendance = new Attendance(user, 0);
 		adminService.createUser(attendance);

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.ams.model.User;
 
 public interface UserRepo extends JpaRepository<User, Long> {
-	User findByUsername(String username);
+	User findByEmail(String username);
 
 	@Transactional
 	void deleteByUserId(int id);

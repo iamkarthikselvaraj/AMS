@@ -110,7 +110,7 @@ public class Report implements java.io.Serializable {
 		this.day = day;
 	}
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "time_of_login", length = 8)
 	public Date getTimeOfLogin() {
 		return this.timeOfLogin;
@@ -120,8 +120,8 @@ public class Report implements java.io.Serializable {
 		this.timeOfLogin = timeOfLogin;
 	}
 
-	@Temporal(TemporalType.TIME)
-	@Column(name = "time_of_logout", length = 8)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "time_of_logout", length = 19)
 	public Date getTimeOfLogout() {
 		return this.timeOfLogout;
 	}

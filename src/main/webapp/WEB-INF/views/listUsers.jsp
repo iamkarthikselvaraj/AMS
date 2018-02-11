@@ -19,6 +19,7 @@
 			<tr>
 				<th scope="col col-sm">#Id</th>
 				<th scope="col">Username</th>
+				<th scope="col">Email</th>
 				<th scope="col">Privilege</th>
 				<th scope="col">Action</th>
 			</tr>
@@ -28,6 +29,7 @@
 				<tr>
 					<th scope="row">${user.userId}</th>
 					<td>${user.username}</td>
+					<td>${user.email}</td>
 					<td>${user.privilege.access}</td>
 					<td>
 						<%-- 						<form action="${contextPath}/users/${user.userId}/delete"  method="post"><input class="btn btn-danger" type="submit" value="Delete"/></form> --%>

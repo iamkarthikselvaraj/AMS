@@ -1,5 +1,7 @@
 package com.app.ams.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +25,14 @@ import com.app.ams.model.Report;
  *
  */
 public class ExcelBuilder extends AbstractExcelView {
-
+	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+	DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, HSSFWorkbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+	String filename=model.get("excelname").toString();
+	System.out.println(filename);
+		response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
 		// get data model which is passed by the Spring container
 		List<Report> listReport = (List<Report>) model.get("listReport");
 
@@ -39,9 +45,9 @@ public class ExcelBuilder extends AbstractExcelView {
 		Font font = workbook.createFont();
 		font.setFontName("Arial");
 		style.setFillForegroundColor(HSSFColor.BLUE.index);
-		// style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+//		 style.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		// font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		font.setColor(HSSFColor.WHITE.index);
+		font.setColor(HSSFColor.BLACK.index);
 		style.setFont(font);
 
 		// create header row
@@ -74,18 +80,20 @@ public class ExcelBuilder extends AbstractExcelView {
 		header.createCell(8).setCellValue("Comments");
 		header.getCell(8).setCellStyle(style);
 
+		
+		
 		// create data rows
 		int rowCount = 1;
 
 		for (Report report : listReport) {
 			HSSFRow aRow = sheet.createRow(rowCount++);
-			aRow.createCell(0).setCellValue(report.getUser().getUserId());
+			aRow.createCell(0).setCellValue(report.getUser().getUserId()+"");
 			aRow.createCell(1).setCellValue(report.getUser().getEmail());
 			aRow.createCell(2).setCellValue(report.getUser().getUsername());
-			aRow.createCell(3).setCellValue(report.getDate());
+			aRow.createCell(3).setCellValue(df.format(report.getDate()));
 			aRow.createCell(4).setCellValue(report.getDay());
-			aRow.createCell(5).setCellValue(report.getTimeOfLogin());
-			aRow.createCell(6).setCellValue(report.getTimeOfLogout());
+			aRow.createCell(5).setCellValue(df1.format(report.getTimeOfLogin()));
+			aRow.createCell(6).setCellValue(df1.format(report.getTimeOfLogout()));
 			aRow.createCell(7).setCellValue(report.getWorkedHours());
 			aRow.createCell(8).setCellValue(report.getComments());
 		}

@@ -1,5 +1,7 @@
 package com.app.ams.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -79,7 +81,15 @@ public class AdminController {
 
 	@RequestMapping(value = "/exportReport", method = RequestMethod.GET)
 	public ModelAndView exportReport() {
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		Date start=new Date();
+		Date end=new Date();
+		String FileName="Report_"+df.format(start)+"_"+df.format(end)+".xls";
 		List<Report> reports = userService.findByDateBetween(new Date(), new Date());
-		return new ModelAndView("excelView", "listReport", reports);
+		
+		ModelAndView model=new ModelAndView("excelView", "listReport", reports);
+		model.addObject("excelname", FileName);
+		return model;
 	}
 }

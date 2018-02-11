@@ -17,7 +17,8 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-<%-- 	   <link href="${contextPath}/resources/css/common.css" rel="stylesheet"> --%>
+	   <link href="${contextPath}/resources/css/bootstrap-datepicker.css" rel="stylesheet">
+	   
 <style>
 .card-width {
 	width: 500px;
@@ -77,8 +78,8 @@ display: none;
 	<script src="${contextPath}/resources/js/validation.js">
 		
 	</script>
-	<script src="${contextPath}/resources/js/effects.js">
-		
+	<script src="${contextPath}/resources/js/effects.js"></script>
+	<script src="${contextPath}/resources/js/bootstrap-datepicker.js">
 	</script>
 
 	<!-- 	javascript action -->

@@ -7,12 +7,6 @@
 
 <div class="container-fluid auth-form"
 	style="max-width: 500px; margin-top: 10%;">
-<div class="input-group date" data-provide="datepicker">
-    <input type="text" class="form-control">
-    <div class="input-group-addon">
-        <span class="glyphicon glyphicon-th"></span>
-    </div>
-</div>
 	<c:if test="${not empty msg}">
 		<div class="alert alert-${css} alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert"
